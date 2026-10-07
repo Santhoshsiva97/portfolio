@@ -36,7 +36,7 @@ function loadProjects(): Project[] {
     .readdirSync(PROJECTS_DIR)
     .filter((f) => f.endsWith(".mdx") && !f.startsWith("_"));
 
-  return files.map((file) => {
+  return files.flatMap((file): Project[] => {
     const slug = file.replace(/\.mdx$/, "");
     const where = `content/projects/${file}`;
     if (!SLUG_PATTERN.test(slug)) {
@@ -70,6 +70,7 @@ function loadProjects(): Project[] {
     }
 
     const body = source.slice(match[0].length);
+    if (parsed.data.draft && process.env.NODE_ENV === "production") return [];
     const project: Project = {
       ...parsed.data,
       slug,
@@ -78,7 +79,7 @@ function loadProjects(): Project[] {
     // Images are added later than the text; until then the UI falls back to a generated cover.
     if (project.cover && !publicFileExists(project.cover)) project.cover = null;
     project.gallery = project.gallery.filter(publicFileExists);
-    return project;
+    return [project];
   });
 }
 

@@ -1,0 +1,12 @@
+# Keep LF everywhere so Prettier (LF) and git agree on Windows checkouts.
+* text=auto eol=lf
+
+# Binary assets
+*.ttf binary
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.pdf binary
+*.ico binary

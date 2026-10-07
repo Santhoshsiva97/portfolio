@@ -200,6 +200,8 @@ export const projectFrontmatterSchema = z.object({
   /** Rough completion for in-progress work (0–100), shown as a progress bar on /now. */
   progress: z.number().int().min(0).max(100).nullable().default(null),
   updated: isoDate,
+  /** Drafts show in `npm run dev` (with a "Draft" badge) but never in production builds. */
+  draft: z.boolean().default(false),
   featured: z.boolean().default(false),
   order: z.number().int().default(99),
   stack: z.array(z.string()).min(1),

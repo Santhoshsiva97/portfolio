@@ -106,6 +106,11 @@ export default async function CaseStudyPage({
               {statusLabel[project.status]}
             </Badge>
             <Badge tone="outline">{typeLabel[project.type]}</Badge>
+            {project.draft && (
+              <Badge tone="flow" dot="static">
+                Draft · dev only
+              </Badge>
+            )}
           </div>
           <h1 className="stagger-1 mt-5 max-w-5xl animate-lift text-5xl leading-[0.95] font-extrabold sm:text-7xl">
             {project.title}

@@ -16,7 +16,7 @@
 | 9 | SEO and sharing | ✅ |
 | 10 | Quality pass | ✅ |
 | 11 | Deploy | 🟡 Code ready; waiting on owner accounts (Vercel, domain, Resend) |
-| 12 | Launch and upkeep | ⬜ |
+| 12 | Launch and upkeep | 🟡 Kit and tooling done; owner posts after the site is live |
 
 ## Log
 
@@ -337,4 +337,37 @@
 - **GitHub repo `Santhoshsiva97/portfolio` is PUBLIC.** Pushing publishes `content/` (including the phone number in `resume.json`; it's also in the public PDF) and the content TODO comments.
 
 **Waiting on the owner:** push approval, Vercel sign-up/import, domain purchase + DNS, Resend account/key.
+
+**Committed and pushed (2026-10-08):** Step 11 prep as `fd459ae`. `main` was fast-forwarded `2d73db5..fd459ae` and pushed to the public `Santhoshsiva97/portfolio`, along with all step branches (`step-0-1-setup` … `step-11-deploy`). The owner approved the public push (phone number included) and chose Resend for email. The domain is decided later, so the site launches on `*.vercel.app` first.
+
+**Next (owner):** `DEPLOY.md` parts 2 (Vercel import + Analytics) and 4 (Resend key → Vercel env vars, redeploy). Then share the `.vercel.app` URL so Claude can verify the live site.
+
+### 2026-10-08 — Step 12 (launch and upkeep)
+
+**Branch:** `step-12-launch` (from `step-11-deploy` @ `fd459ae`). The GitHub deployments API showed no Vercel deployments yet: the owner hasn't imported the project.
+
+- **Upkeep tooling:**
+  - `npm run new:project -- <slug> "<Title>"` (`scripts/new-project.mjs`): scaffolds `content/projects/<slug>.mdx` from `_template.mdx` with title, local-date `startDate`/`updated` and image paths, and creates `public/images/projects/<slug>/`. It rejects bad slugs and existing files.
+  - **Drafts:** new frontmatter field `draft` (default false). The scaffold sets `draft: true`. Drafts are dropped by the loader when `NODE_ENV === "production"` (so they're hidden from listings, sitemap, OG, PDF and `/now`) and show a "Draft · dev only" badge in dev. Verified: dev listed the test draft with the badge; the production build stayed at 25 routes. The test drafts were removed.
+  - `npm run check` = lint + typecheck + build.
+  - `.gitattributes` (`* text=auto eol=lf`, binary assets) stops CRLF/LF churn between git on Windows and Prettier. That churn showed up as 64 "modified" files, of which only 7 really changed.
+- **Docs:**
+  - `UPDATING.md`: owner recipes for adding a project, finishing one, the monthly `/now` refresh, resume (job, availability, testimonials, certificates), services and prices, the domain, commands and troubleshooting.
+  - README now has a docs table and the new scripts.
+- **Launch kit (`launch/`):**
+  - `LAUNCH_KIT.md`:
+    - LinkedIn headline A (names Esko, 161 chars) and B (role-neutral, 164)
+    - LinkedIn About, profile settings (website, Featured, Providing services, Open to work for recruiters only) and a launch post
+    - GitHub steps (profile README repo, website, pin, repo About)
+    - Upwork/Fiverr title, overview, skills and gig titles
+    - Email signature and checklist
+    - All facts come from `resume.json` and the case studies. It flags that the owner's employment terms may restrict freelancing.
+  - `github-profile-README.md` for the `Santhoshsiva97/Santhoshsiva97` profile repo.
+  - `email-signature.html` (inline-styled table, AA-contrast link colour).
+  - `https://YOUR-SITE` placeholders (22) are replaced once the live URL is known.
+- Verified: `npm run check` passes (25 routes); the LinkedIn headlines are within 220 chars.
+
+**Owner to do:**
+- Vercel import + Resend (`DEPLOY.md`), then send the live URL. Claude will then replace the placeholders, verify the live site and the contact email, and optionally create the GitHub profile README repo.
+- Post on LinkedIn and update profiles per `launch/LAUNCH_KIT.md`.
 

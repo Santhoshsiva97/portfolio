@@ -111,6 +111,12 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - `content/now.json` (`getNow()`): update `updated` whenever you edit it. Project progress comes from frontmatter `progress` + `progressNote` + `targetDate`.
 - `/now` and the home `NowBoard` show `in-progress` + `planned` projects. The "Slot available" call-to-action appears while `resume.json` `availability.freelance` is true.
 
+## Upkeep
+
+- `npm run new:project -- <slug> "<Title>"` scaffolds a **draft** case study. Drafts are visible in dev only (the loader drops them in production).
+- `npm run check` before pushing. Owner-facing guides: `UPDATING.md`, `DEPLOY.md`, `launch/LAUNCH_KIT.md`.
+- Line endings: `.gitattributes` forces LF.
+
 ## Projects pages
 
 - `/projects` uses `ProjectsExplorer` (client): filters live in the URL and the cards are server-rendered and passed in by slug. Keep `useSearchParams` inside `<Suspense>` whose fallback is `ProjectsFilterView params={null}` (the full list stays in the static HTML).

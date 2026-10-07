@@ -38,6 +38,11 @@ export function ProjectCard({
             {statusLabel[project.status]}
           </Badge>
           <Badge tone="outline">{typeLabel[project.type]}</Badge>
+          {project.draft && (
+            <Badge tone="flow" dot="static">
+              Draft · dev only
+            </Badge>
+          )}
         </div>
 
         <h3
