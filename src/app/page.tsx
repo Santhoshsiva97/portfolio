@@ -1,3 +1,7 @@
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { homeGraph } from "@/lib/seo/structured-data";
 import { ExperienceSnapshot } from "@/components/home/ExperienceSnapshot";
 import { Hero } from "@/components/home/Hero";
 import { ProcessFlow } from "@/components/home/ProcessFlow";
@@ -19,6 +23,12 @@ import {
 } from "@/lib/content";
 import { contactHref } from "@/lib/nav";
 
+export const metadata: Metadata = pageMetadata({
+  description:
+    "Full stack engineer with 7+ years of React, Node.js and TypeScript. I build web apps, Shopify stores and workflow automation for businesses. Available for freelance projects.",
+  path: "/",
+});
+
 export default function Home() {
   const home = getHome();
   const resume = getResume();
@@ -33,6 +43,7 @@ export default function Home() {
 
   return (
     <>
+      <JsonLd data={homeGraph()} />
       <Hero home={home} resume={resume} />
       <SkillsMarquee skills={home.techStrip} />
 

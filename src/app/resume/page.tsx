@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { profilePageSchema } from "@/lib/seo/structured-data";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -15,11 +18,13 @@ import {
 } from "@/lib/content";
 import { contactHref, resumePdfHref } from "@/lib/nav";
 
-export const metadata: Metadata = {
-  title: "Resume — Santhosh Sivakumar",
+export const metadata: Metadata = pageMetadata({
+  title: "Resume",
   description:
     "Resume of Santhosh Sivakumar: Full Stack Software Engineer with 7+ years of Node.js, TypeScript and React.js experience.",
-};
+  path: "/resume",
+  type: "profile",
+});
 
 export default function ResumePage() {
   const resume = getResume();
@@ -54,6 +59,7 @@ export default function ResumePage() {
 
   return (
     <>
+      <JsonLd data={profilePageSchema()} />
       <section className="relative overflow-hidden border-b border-line print:border-0">
         <div
           aria-hidden="true"

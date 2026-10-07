@@ -8,6 +8,8 @@ import {
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeScript } from "@/components/layout/ThemeScript";
+import { getResume } from "@/lib/content";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,10 +34,30 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
+const { basics, skills } = getResume();
+
 export const metadata: Metadata = {
-  title: "Santhosh Sivakumar — Full Stack Software Engineer",
-  description:
-    "Portfolio and resume of Santhosh Sivakumar, a full stack engineer building web apps, Shopify stores and workflow automation.",
+  // Resolves relative canonical / Open Graph URLs (see getSiteUrl for where the origin comes from).
+  metadataBase: getSiteUrl(),
+  title: {
+    default: `${basics.name} — ${basics.label}`,
+    template: `%s — ${basics.name}`,
+  },
+  description: `Portfolio and resume of ${basics.name}, a full stack engineer building web apps, Shopify stores and workflow automation.`,
+  applicationName: basics.name,
+  authors: [{ name: basics.name, url: "/" }],
+  creator: basics.name,
+  keywords: [
+    basics.name,
+    basics.label,
+    "freelance developer",
+    "Bangalore",
+    ...skills
+      .filter((g) => ["Frontend", "Backend", "E-commerce"].includes(g.name))
+      .flatMap((g) => g.keywords)
+      .slice(0, 12),
+  ],
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {

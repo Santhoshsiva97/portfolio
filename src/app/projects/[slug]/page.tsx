@@ -21,6 +21,9 @@ import {
 } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { contactHref } from "@/lib/nav";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { projectSchema } from "@/lib/seo/structured-data";
 
 // Every case study is prerendered at build time. Any other slug falls through to notFound() below
 // (`dynamicParams` isn't allowed with cacheComponents).
@@ -33,10 +36,12 @@ export async function generateMetadata({
 }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const project = getProject((await params).slug);
   if (!project) return {};
-  return {
+  return pageMetadata({
     title: `${project.title} — Case study`,
     description: project.summary,
-  };
+    path: `/projects/${project.slug}`,
+    type: "article",
+  });
 }
 
 export default async function CaseStudyPage({
@@ -73,6 +78,7 @@ export default async function CaseStudyPage({
 
   return (
     <article>
+      <JsonLd data={projectSchema(project)} />
       {/* Header */}
       <header className="relative overflow-hidden">
         <div

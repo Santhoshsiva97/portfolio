@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import { ProcessFlow } from "@/components/home/ProcessFlow";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -8,11 +9,12 @@ import { Accent, Eyebrow, Section } from "@/components/ui/Section";
 import { getHome, getProjects, getServices } from "@/lib/content";
 import { contactHref } from "@/lib/nav";
 
-export const metadata: Metadata = {
-  title: "Services — Santhosh Sivakumar",
+export const metadata: Metadata = pageMetadata({
+  title: "Services",
   description:
     "Custom web applications, Shopify stores and workflow automation. What's included, how we work together, and how to get started.",
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   const { intro, services, faq } = getServices();

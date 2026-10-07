@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import { Suspense } from "react";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import {
@@ -12,11 +13,12 @@ import { Accent, Eyebrow } from "@/components/ui/Section";
 import { getProjects } from "@/lib/content";
 import { contactHref } from "@/lib/nav";
 
-export const metadata: Metadata = {
-  title: "Work — Santhosh Sivakumar",
+export const metadata: Metadata = pageMetadata({
+  title: "Work",
   description:
     "Case studies of web apps, Shopify stores and workflow automation built by Santhosh Sivakumar.",
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   // Planned projects live on /now; this page lists work that exists.

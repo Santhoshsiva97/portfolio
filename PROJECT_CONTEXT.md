@@ -92,6 +92,13 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - Spam: honeypot `company_website` + `started_at` ≥ 3 s. Bots get a fake success.
 - `/contact?service=<slug>` preselects the project type.
 
+## SEO
+
+- Absolute URLs: `getSiteUrl()` in `src/lib/site-url.ts` (resume `basics.website` > `NEXT_PUBLIC_SITE_URL` > Vercel production URL > localhost).
+- Every page exports `pageMetadata({ title, description, path, type })` from `src/lib/seo/metadata.ts`. New pages must do the same.
+- Share images: add an `opengraph-image.tsx` that returns `renderOgCard({...})`. Dynamic segments need `generateStaticParams` in the image file too. Satori needs flex layouts and hex colours (no CSS vars); fonts come from `src/assets/fonts/*.ttf`.
+- `sitemap.ts` lists pages explicitly, so add new routes there. JSON-LD helpers live in `src/lib/seo/structured-data.ts`.
+
 ## Resume
 
 - `/resume` (HTML) and `/resume.pdf` (`src/app/resume.pdf/route.ts`, react-pdf) both render `resume.json`. The PDF also lists in-progress and completed projects. Keep the PDF ATS-safe: one column, Helvetica, no images or tables.

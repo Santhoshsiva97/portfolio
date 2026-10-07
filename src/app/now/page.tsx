@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import Link from "next/link";
 import { ProgressBar } from "@/components/now/ProgressBar";
 import { ProjectCover } from "@/components/projects/ProjectCover";
@@ -18,11 +19,12 @@ import {
 } from "@/lib/content";
 import { contactHref, resumePdfHref } from "@/lib/nav";
 
-export const metadata: Metadata = {
-  title: "Now — Santhosh Sivakumar",
+export const metadata: Metadata = pageMetadata({
+  title: "Now",
   description:
     "What Santhosh Sivakumar is building, learning and open to right now.",
-};
+  path: "/now",
+});
 
 export default function NowPage() {
   const now = getNow();

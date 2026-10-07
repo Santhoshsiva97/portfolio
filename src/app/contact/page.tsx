@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import { Suspense } from "react";
 import {
   ContactForm,
@@ -10,11 +11,12 @@ import { Accent, Eyebrow } from "@/components/ui/Section";
 import { getResume, getServices } from "@/lib/content";
 import { socialLinks } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact — Santhosh Sivakumar",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact",
   description:
     "Tell me about your web app, Shopify store or automation project, or get in touch about a full-time role.",
-};
+  path: "/contact",
+});
 
 const nextSteps = [
   {

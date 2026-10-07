@@ -13,7 +13,7 @@
 | 6 | "Now building" | ✅ |
 | 7 | Resume page and PDF | ✅ |
 | 8 | Services and contact | ✅ |
-| 9 | SEO and sharing | ⬜ |
+| 9 | SEO and sharing | ✅ |
 | 10 | Quality pass | ⬜ |
 | 11 | Deploy | ⬜ |
 | 12 | Launch and upkeep | ⬜ |
@@ -257,4 +257,37 @@
 - Set prices / `bookingUrl` in `services.json` if wanted.
 
 **Next:** Step 9 (SEO and sharing: metadata, OG images, sitemap, robots, JSON-LD).
+
+**Committed:** Step 8 as `3495ad5` on `step-8-services-contact` (not pushed).
+
+### 2026-10-07 — Step 9 (SEO and sharing)
+
+**Branch:** `step-9-seo` (from `step-8-services-contact` @ `3495ad5`)
+
+- **Site URL:** `src/lib/site-url.ts` `getSiteUrl()` / `absoluteUrl()`. Order: `resume.json` `basics.website` → `NEXT_PUBLIC_SITE_URL` → `https://$VERCEL_PROJECT_PRODUCTION_URL` → `http://localhost:3000`. Everything currently resolves to localhost until the domain is set (Step 11).
+- **Metadata:**
+  - The layout sets `metadataBase`, a title template (`%s — Santhosh Sivakumar`), description, keywords, authors and `formatDetection` off.
+  - `src/lib/seo/metadata.ts` `pageMetadata()` gives every page a title, description, canonical, a full Open Graph set (type/url/siteName/locale `en_IN`) and a Twitter `summary_large_image`. A page-level `openGraph` replaces the layout's, so each page builds the full set.
+  - Used on home, `/projects`, case studies (`article`), `/now`, `/services`, `/resume` (`profile`) and `/contact`. `/styleguide` stays noindex.
+- **OG images:**
+  - `src/lib/og/OgCard.tsx` `renderOgCard()`: a 1200×630 Flowline card (paper/ink/signal/flow themes, dot grid, flow line, logo, badge, eyebrow, headline with a word-by-word italic accent, chips, domain).
+  - Brand TTFs in `src/assets/fonts/` (Bricolage 800, Instrument Serif Italic, Geist Mono 500; OFL, downloaded from Google Fonts with the owner's OK; see the README there), read at module scope in `src/lib/og/fonts.ts`.
+  - `opengraph-image.tsx` for `/` (also the default), `/projects`, `/projects/[slug]` (theme matches the cover colour), `/now`, `/services`, `/resume` and `/contact`.
+  - The `[slug]` image needed its own `generateStaticParams` to be prerendered; it now shows ●.
+- **Icons:** the scaffold's `favicon.ico` (Next logo) is removed. `icon.tsx` (64px) and `apple-icon.tsx` (180px, full bleed) come from `LogoMark` (solid flow line, so it stays legible at 16px).
+- **`sitemap.ts`:** home, projects list, each case study, services, resume, now and contact. `lastModified` comes from content dates (`now.json` `updated`, project `updated`), never the clock.
+- **`robots.ts`:** allow everything, disallow `/styleguide`, point to the sitemap.
+- **JSON-LD** (`src/lib/seo/structured-data.ts` + `components/seo/JsonLd.tsx`, with `<` escaped):
+  - Home: an `@graph` with Person (jobTitle, address, sameAs, 32 `knowsAbout` skills, `worksFor` the current employer, `alumniOf`) and WebSite.
+  - `/resume`: ProfilePage whose `mainEntity` is the Person.
+  - Case studies: CreativeWork (author = Person `@id`, dates, keywords, status).
+- **Verified:**
+  - Build: every route is static (○/●). `/projects/[slug]` keeps its partial-prerender shell for unknown slugs.
+  - Production head of a case study: title, description, canonical, og:* (image 1200×630 + alt, type article) and twitter:* all present; icon and apple-touch-icon links present.
+  - `/robots.txt` and `/sitemap.xml` are correct (8 URLs).
+  - All 8 OG images and 2 icons return 200 image/png. Contact sheets were reviewed and two fixes made: the accent was indenting when it wrapped (now word-by-word), and the case-study footer URL wrapped onto 3 lines (now the domain only, max 4 chips).
+  - JSON-LD parses on `/`, `/resume` and a case study.
+- **After the domain is live:** set `basics.website` (or `NEXT_PUBLIC_SITE_URL` in Vercel), redeploy, then check the Rich Results Test and validator.schema.org, and preview links with LinkedIn Post Inspector and the opengraph.xyz debugger.
+
+**Next:** Step 10 (quality pass: responsive, Lighthouse, accessibility, 404 page).
 
