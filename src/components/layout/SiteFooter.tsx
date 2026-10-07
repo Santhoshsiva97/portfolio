@@ -12,7 +12,7 @@ const COPYRIGHT_YEAR = 2026;
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto">
+    <footer className="mt-auto print:hidden">
       {/* CTA band */}
       <section className="relative overflow-hidden bg-ink text-paper">
         <div

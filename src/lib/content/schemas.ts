@@ -40,6 +40,8 @@ export const resumeSchema = z.object({
       country: z.string(),
     }),
     photo: publicPath,
+    /** The portfolio's own URL once the domain is live (shown in the PDF header). */
+    website: todoable.pipe(z.url().nullable()).default(null),
     availability: z.object({
       freelance: z.boolean(),
       fullTime: z.boolean(),

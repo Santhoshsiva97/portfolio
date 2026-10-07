@@ -6,7 +6,8 @@ Tick these off as you gather them. Search the content files for `TODO` to find e
 
 - [ ] **Positioning line** (`resume.json` → `basics.positioning`): one sentence for clients, covering what you build and for whom.
 - [ ] **Availability note** (`basics.availability.note`): e.g. freelance + full-time, remote or Bangalore.
-- [ ] **LinkedIn URL** (`basics.profiles`).
+- [ ] **LinkedIn URL** (`basics.profiles`). It also appears in the PDF resume header.
+- [ ] **Website** (`basics.website`): set it to your domain after Step 11 so the PDF links back to the site.
 - [ ] **Profile photo**: square, at least 800×800, plain background. Save it as `public/images/profile.jpg`. (`Portfolio/profile/` is empty right now.)
 - [ ] **Featured projects**: the top 3. Currently Interview Prep Portal and PS Textile. Which is the third?
 

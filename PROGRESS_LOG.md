@@ -11,7 +11,7 @@
 | 4 | Home page | ✅ |
 | 5 | Projects | ✅ |
 | 6 | "Now building" | ✅ |
-| 7 | Resume page and PDF | ⬜ |
+| 7 | Resume page and PDF | ✅ |
 | 8 | Services and contact | ⬜ |
 | 9 | SEO and sharing | ⬜ |
 | 10 | Quality pass | ⬜ |
@@ -181,4 +181,36 @@
   - Screenshots: `/now` in light theme and the home now-board in dark theme.
 
 **Next:** Step 7 (resume page + generated ATS PDF at `/resume.pdf`).
+
+**Committed:** Step 6 as `ab509f9` on `step-6-now` (not pushed).
+
+### 2026-10-07 — Step 7 (resume page and PDF)
+
+**Branch:** `step-7-resume` (from `step-6-now` @ `ab509f9`)
+
+- **`/resume.pdf`:**
+  - Generated from `resume.json` and the in-progress/completed projects by `@react-pdf/renderer` 4.9 (already on Next's server-external list, so no config needed).
+  - Served by `src/app/resume.pdf/route.ts`, inline with the filename `Santhosh_Sivakumar_Resume.pdf`.
+  - Rendering lives in a `"use cache"` + `cacheLife("max")` helper. react-pdf stamps a creation date, which otherwise made the route dynamic (`ƒ`); it's now prerendered (`○`).
+  - **Gotcha:** in dev the cached PDF doesn't refresh when `ResumeDocument` changes. Restart `next dev`, or check with `portfolio-prod`.
+- **`src/lib/resume-pdf/ResumeDocument.tsx` (ATS-friendly):**
+  - A4, one column, built-in Helvetica, real selectable text and PDF metadata (title, author, keywords = skills).
+  - Sections: Professional Summary, Technical Skills, Professional Experience, Projects, Education, plus Certifications when present. It mirrors `Resume_Santhosh_ATS.pdf`.
+  - The phone number appears only here.
+  - Pagination: headings use `minPresenceAhead`. Each work project's name and first bullet form one unbreakable `View`, because `minPresenceAhead` alone didn't stop a stranded title.
+- **`/resume`:**
+  - Hero: name, label and headline, location, "Download PDF" and "Get in touch".
+  - Sidebar: contact (email, profiles, website), "Open to" badges, skill groups as chips.
+  - Main: summary, an experience timeline with every highlight, project cards linking to case studies, education, certifications, and a call-to-action for the PDF.
+  - Print styles: the site header, footer, sidebar and buttons are hidden (`print:hidden`).
+  - The sidebar was sticky but is taller than the viewport, so stickiness was removed.
+- New optional `basics.website` (todoable URL) in `resume.json`. It's shown in the PDF header and the contact list once the domain is live (Step 11).
+- **Verified:**
+  - Lint, typecheck and build pass; `/resume` and `/resume.pdf` are static.
+  - The production response is `application/pdf` with `x-nextjs-cache: HIT`.
+  - The PDF text layer extracts in reading order (checked on 3 renders). Fixed along the way: the header name overlapped the label line (lineHeight), and a project title was stranded at the bottom of page 1.
+  - On `/resume`: the phone appears nowhere (also 0 matches in the production HTML), both jobs show all 19 bullets, the 4 PDF links are plain anchors, the "Resume" nav item is active, and there are 0 failed requests.
+  - Headless screenshot of the page in light theme looks right.
+
+**Next:** Step 8 (services and contact form).
 

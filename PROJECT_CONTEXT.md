@@ -85,6 +85,11 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - Projects are sorted by `order`, then newest `startDate`. Files starting with `_` are ignored.
 - In dev, projects are re-read on every request; in production they're read once. `/styleguide` has a "Content check" section showing what the loaders return.
 
+## Resume
+
+- `/resume` (HTML) and `/resume.pdf` (`src/app/resume.pdf/route.ts`, react-pdf) both render `resume.json`. The PDF also lists in-progress and completed projects. Keep the PDF ATS-safe: one column, Helvetica, no images or tables.
+- The PDF is cached with `"use cache"`. In dev, restart `next dev` to see layout changes, or use `portfolio-prod`.
+
 ## Now page
 
 - `content/now.json` (`getNow()`): update `updated` whenever you edit it. Project progress comes from frontmatter `progress` + `progressNote` + `targetDate`.

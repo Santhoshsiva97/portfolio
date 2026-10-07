@@ -10,7 +10,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-50 print:hidden">
       {/* Blur lives on a separate layer: backdrop-filter on <header> would trap the fixed mobile menu inside it. */}
       <div
         aria-hidden="true"
