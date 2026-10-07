@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { statusLabel, typeLabel, type Project } from "@/lib/content";
+import { statusLabel, typeLabel } from "@/lib/content/format";
+import type { Project } from "@/lib/content/projects";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { ProjectCover } from "./ProjectCover";

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
-import type { Project } from "@/lib/content";
+import type { Project } from "@/lib/content/projects";
 
 // Generated covers rotate through the brand colors so a grid of image-less projects still looks designed.
 const tones = [
@@ -13,11 +13,14 @@ const tones = [
 export function ProjectCover({
   project,
   tone = 0,
+  size = "md",
   priority,
   className,
 }: {
   project: Project;
   tone?: number;
+  /** "lg" = the wide hero cover on a case-study page. */
+  size?: "md" | "lg";
   priority?: boolean;
   className?: string;
 }) {
@@ -26,6 +29,7 @@ export function ProjectCover({
       <div
         className={cn(
           "relative aspect-[16/10] overflow-hidden rounded-2xl bg-surface-2",
+          size === "lg" && "rounded-3xl sm:aspect-[21/9]",
           className,
         )}
       >
@@ -46,6 +50,7 @@ export function ProjectCover({
       aria-hidden="true"
       className={cn(
         "relative flex aspect-[16/10] flex-col justify-between overflow-hidden rounded-2xl p-5 sm:p-7",
+        size === "lg" && "rounded-3xl sm:aspect-[21/9] sm:p-10",
         tones[tone % tones.length],
         className,
       )}
@@ -71,7 +76,12 @@ export function ProjectCover({
         {project.client}
       </p>
       <div className="relative flex items-end justify-between gap-4">
-        <p className="font-display text-3xl leading-[0.95] font-extrabold tracking-tight sm:text-4xl">
+        <p
+          className={cn(
+            "font-display text-3xl leading-[0.95] font-extrabold tracking-tight sm:text-4xl",
+            size === "lg" && "sm:text-6xl",
+          )}
+        >
           {project.title}
         </p>
         <ul className="hidden shrink-0 flex-col items-end gap-1.5 sm:flex">

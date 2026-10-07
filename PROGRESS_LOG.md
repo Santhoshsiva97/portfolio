@@ -9,7 +9,7 @@
 | 2 | Design system and layout | ✅ |
 | 3 | Content layer | ✅ |
 | 4 | Home page | ✅ |
-| 5 | Projects | ⬜ |
+| 5 | Projects | ✅ |
 | 6 | "Now building" | ⬜ |
 | 7 | Resume page and PDF | ⬜ |
 | 8 | Services and contact | ⬜ |
@@ -118,4 +118,40 @@
 - Links to `/projects/<slug>`, `/projects`, `/services`, `/resume` and `/contact` return 404 until Steps 5–8.
 
 **Next:** Step 5 (`/projects` list with filters and `/projects/[slug]` case-study pages).
+
+**Committed:** Step 4 as `9a22e69` on `step-4-home-page` (not pushed).
+
+### 2026-10-07 — Step 5 (projects list and case studies)
+
+**Branch:** `step-5-projects` (from `step-4-home-page` @ `9a22e69`)
+
+- **`/projects`:**
+  - Lists in-progress and completed projects. Planned ones are left for `/now`.
+  - Filtering is done by `ProjectsExplorer`, a client component. The cards are server-rendered `ProjectCard`s passed in as props, so the client only chooses which to show.
+  - Filters are status, type and tech (top 10, then "+N more"). A row is hidden when it has only one value. Each filter state lives in the URL (`?status=&type=&tech=`) via `history.replaceState`, so back-button history isn't polluted. Unknown values are ignored.
+  - "Showing X of Y" (aria-live), "Clear filters" and an empty state.
+  - `useSearchParams` sits inside `<Suspense>`. The fallback is the same view with no filters, so the static HTML contains every project.
+  - A "Looking for my day-job experience?" call-to-action links to the resume.
+- **`/projects/[slug]`:**
+  - `generateStaticParams` prerenders every case study, and `generateMetadata` sets the title and description.
+  - Header: back link, badges, H1, summary, links to the live site, source code or write-up (only those that exist), and a meta grid (client, role, timeline, stack).
+  - `ProjectCover size="lg"` (21:9 on desktop).
+  - A "Now building" or "Coming up" panel with progress note, target date and updated date, plus a Results panel. They sit side by side only when both exist.
+  - The MDX body sits beside a sticky "On this page" table of contents (`CaseStudyToc`, a client component; IntersectionObserver highlights the current section).
+  - "Built with" chips link to `/projects?tech=…`. Then the screens gallery (when images exist), a "Need something like this?" call-to-action, and previous/next case-study links.
+- **Heading ids:** `rehype-slug` added to the MDX pipeline. `projects.ts` computes the same ids with `github-slugger` (`Project.headings`), skipping code fences.
+- `ProjectCard` and `ProjectCover` now import from `@/lib/content/format` and `@/lib/content/projects` (types only), so they can be used from client components too.
+- `format.ts` gained `formatDate("2026-10-07")` → "7 Oct 2026".
+- **Next 16 findings:**
+  - `export const dynamicParams` isn't allowed with `cacheComponents`, so it's removed. Unknown slugs call `notFound()`.
+  - With `partialPrefetching`, an unknown slug is streamed, so production returns **200** with the not-found UI and an injected `<meta name="robots" content="noindex">` (documented behaviour). Dev returns 404. Accepted; real 404 statuses would need a proxy.
+- New launch config `portfolio-prod` (build + `next start` on port 3101) for production checks.
+- **Verified:**
+  - Lint, typecheck and build pass. `/projects` and both case studies are static (○), and `[slug]` has a partial-prerender shell for unknown slugs.
+  - In dev, filters work: Liquid shows 1 of 2 with `?tech=Liquid`; adding the Personal type gives 0 and the empty state; clear removes the query; history length is unchanged.
+  - In production, the static HTML contains both projects, and the `?tech=Shopify` deep link shows 1 of 2 with the chip pressed and 0 failed requests.
+  - All 6 table-of-contents links resolve to heading ids (including "What's next" → `#whats-next`).
+  - Screenshots: the case study in light theme, before and after the cover-size fix, and `/projects` in dark theme.
+
+**Next:** Step 6 ("Now building" section on home and `/now`).
 

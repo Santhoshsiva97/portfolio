@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
 const withMDX = createMDX({
   options: {
     remarkPlugins: ["remark-frontmatter", "remark-gfm"],
+    // Heading ids for the case-study table of contents (projects.ts computes the same ids).
+    rehypePlugins: ["rehype-slug"],
   },
 });
 

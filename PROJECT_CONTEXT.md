@@ -85,7 +85,14 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - Projects are sorted by `order`, then newest `startDate`. Files starting with `_` are ignored.
 - In dev, projects are re-read on every request; in production they're read once. `/styleguide` has a "Content check" section showing what the loaders return.
 
+## Projects pages
+
+- `/projects` uses `ProjectsExplorer` (client): filters live in the URL and the cards are server-rendered and passed in by slug. Keep `useSearchParams` inside `<Suspense>` whose fallback is `ProjectsFilterView params={null}` (the full list stays in the static HTML).
+- `/projects/[slug]` is static via `generateStaticParams`. Section ids come from `rehype-slug`, and `Project.headings` must use the same algorithm (`github-slugger`).
+- Production check: launch config `portfolio-prod` (build + start on port 3101).
+
 ### Gotchas
+- `dynamicParams` (and `dynamic`, `revalidate`, `fetchCache`) isn't allowed with `cacheComponents`. Unknown slugs → `notFound()`, which streams a 200 with `noindex` in production.
 - Don't put `backdrop-filter` on an element that contains `position: fixed` children (it becomes their containing block). The header blurs a separate background layer for this reason.
 - Don't add `hidden` through `className` on `Button`, because its `inline-flex` wins. Wrap it in a `div` instead.
 - SVG presentation attributes don't resolve `var()`. Use classes (`fill-signal`, `stroke-line`) or `style`.

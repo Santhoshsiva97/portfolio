@@ -2,6 +2,7 @@ import "server-only";
 
 import fs from "node:fs";
 import path from "node:path";
+import GithubSlugger from "github-slugger";
 import type { MDXContent } from "mdx/types";
 import { parse as parseYaml } from "yaml";
 import { z } from "zod";
@@ -12,7 +13,13 @@ import {
   type ProjectType,
 } from "./schemas";
 
-export type Project = ProjectFrontmatter & { slug: string };
+export type ProjectHeading = { id: string; text: string };
+
+export type Project = ProjectFrontmatter & {
+  slug: string;
+  /** "## " sections of the body, for the case-study table of contents. */
+  headings: ProjectHeading[];
+};
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
 const PUBLIC_DIR = path.join(process.cwd(), "public");
@@ -62,12 +69,36 @@ function loadProjects(): Project[] {
       );
     }
 
-    const project = { ...parsed.data, slug };
+    const body = source.slice(match[0].length);
+    const project: Project = {
+      ...parsed.data,
+      slug,
+      headings: extractHeadings(body),
+    };
     // Images are added later than the text; until then the UI falls back to a generated cover.
     if (project.cover && !publicFileExists(project.cover)) project.cover = null;
     project.gallery = project.gallery.filter(publicFileExists);
     return project;
   });
+}
+
+/**
+ * Level-2 headings with the same ids rehype-slug gives them (both use github-slugger), skipping code fences.
+ * Inline markdown (**, _, `) is stripped first, matching the heading's rendered text.
+ */
+function extractHeadings(body: string): ProjectHeading[] {
+  const slugger = new GithubSlugger();
+  const headings: ProjectHeading[] = [];
+  let inFence = false;
+  for (const line of body.split(/\r?\n/)) {
+    if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
+    const m = !inFence && /^##\s+(.+?)\s*#*\s*$/.exec(line);
+    if (m) {
+      const text = m[1].replace(/[*_`]/g, "");
+      headings.push({ id: slugger.slug(text), text });
+    }
+  }
+  return headings;
 }
 
 function publicFileExists(publicPath: string) {

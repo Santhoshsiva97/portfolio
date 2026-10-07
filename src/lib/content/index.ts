@@ -7,6 +7,13 @@ export {
   getProjects,
   getProjectSlugs,
   type Project,
+  type ProjectHeading,
 } from "./projects";
 export type { Home, ProjectStatus, ProjectType, Resume } from "./schemas";
-export { formatYearMonth, formatRange, statusLabel, typeLabel } from "./format";
+export {
+  formatDate,
+  formatRange,
+  formatYearMonth,
+  statusLabel,
+  typeLabel,
+} from "./format";

@@ -21,6 +21,12 @@ export function formatYearMonth(value: string): string {
   return `${MONTHS[Number(month) - 1]} ${year}`;
 }
 
+/** "2026-10-07" → "7 Oct 2026" */
+export function formatDate(value: string): string {
+  const [year, month, day] = value.split("-");
+  return `${Number(day)} ${MONTHS[Number(month) - 1]} ${year}`;
+}
+
 /** ("2023-05", null) → "May 2023 – Present" */
 export function formatRange(start: string, end: string | null): string {
   return `${formatYearMonth(start)} – ${end ? formatYearMonth(end) : "Present"}`;
