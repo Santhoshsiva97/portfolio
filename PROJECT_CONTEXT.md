@@ -63,7 +63,21 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - `src/components/ui/`: `Button` (primary / secondary / outline / ghost; `href` makes it a link), `Badge` (tones; `dot="live"` pulses), `Card` (`interactive`), `Container`, `Section` (+ `Eyebrow`, `Accent`), `Icon` (inline SVG, no icon library).
 - `src/components/layout/`: `SiteHeader`, `NavLinks`, `MobileMenu`, `ThemeToggle`, `ThemeScript`, `Logo`, `SiteFooter`.
 - `src/components/visual/FlowCanvas.tsx`: the hero visual.
-- `src/lib/site.ts`: nav items, CTA hrefs, social links (built from `resume.json`; profiles still marked TODO are skipped).
+- `src/lib/nav.ts`: nav items and CTA hrefs. It's client-safe, so client components import from here.
+- `src/lib/site.ts` (`server-only`): site info and social links built from `resume.json`. Client components receive these as props.
+- `src/mdx-components.tsx`: case-study typography plus `<Callout tone="note|win|lesson">`, `<Screenshot>` and `<Stack>`, which work in MDX without an import (`src/components/mdx/`).
+
+## Content layer (`src/lib/content/`)
+
+- Import from `@/lib/content` only: `getResume()`, `getProjects({ status, type, featured })`, `getProject(slug)`, `getProjectSlugs()`, `getProjectBody(slug)`.
+- Zod schemas live in `schemas.ts`. Invalid content **fails the build** with the file, the field and the fix (e.g. `content/projects/x.mdx has invalid frontmatter: ✖ Use "YYYY-MM" → at startDate`).
+- Frontmatter is read with **sync** `fs` (prerendered automatically under `cacheComponents`) and parsed with `yaml`. Bodies are compiled by `@next/mdx` (`remark-frontmatter`, `remark-gfm`) and loaded with a dynamic `import()` of `@content/projects/<slug>.mdx`. Alias: `@content/*` → `content/*`.
+- **TODO handling:**
+  - `resume.json` strings starting with `TODO` load as `null` and are hidden on the site.
+  - In MDX bodies, write notes as `{/* TODO … */}` comments. Plain text would be published.
+  - `cover` and `gallery` paths that don't exist in `public/` are dropped, and the UI shows a generated cover instead.
+- Projects are sorted by `order`, then newest `startDate`. Files starting with `_` are ignored.
+- In dev, projects are re-read on every request; in production they're read once. `/styleguide` has a "Content check" section showing what the loaders return.
 
 ### Gotchas
 - Don't put `backdrop-filter` on an element that contains `position: fixed` children (it becomes their containing block). The header blurs a separate background layer for this reason.
@@ -75,7 +89,7 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 ## Conventions
 
 - Pages are Server Components by default. Add `"use client"` only for interactive parts (theme toggle, mobile menu, filters, form).
-- Content is read at build time through typed loaders in `src/lib/content/`. Components never read `content/` directly.
+- Content is read at build time through typed loaders in `src/lib/content/` (see "Content layer"). Components never read `content/` directly.
 - Project `status` is one of `completed | in-progress | planned`. This drives the "Now building" section.
 - Never put private client data or employer-confidential details in case studies. Work projects stay at resume-bullet level.
 - Images: `public/images/projects/<slug>/…`, served through `next/image`. Max 1600px wide, WebP or JPG.

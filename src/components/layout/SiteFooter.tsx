@@ -1,11 +1,6 @@
 import Link from "next/link";
-import {
-  contactHref,
-  navItems,
-  resumePdfHref,
-  site,
-  socialLinks,
-} from "@/lib/site";
+import { contactHref, navItems, resumePdfHref } from "@/lib/nav";
+import { site, socialLinks } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";

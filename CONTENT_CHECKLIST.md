@@ -1,6 +1,6 @@
 # Content Checklist (Step 0)
 
-Tick these off as you gather them. Search the content files for `TODO` to find every spot still waiting on you.
+Tick these off as you gather them. Search the content files for `TODO` to find every spot still waiting on you. TODOs never show on the site: in `resume.json` a value starting with `TODO` is hidden, and in `.mdx` bodies write notes as `{/* TODO … */}`. If you break a field, the build stops and names the file and the field.
 
 ## Must have before Step 4 (home page)
 

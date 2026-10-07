@@ -24,7 +24,7 @@ export function Logo({ className }: { className?: string }) {
         <circle cx="25" cy="23.5" r="3.5" className="fill-paper" />
       </svg>
       <span className="font-display text-lg leading-none font-bold tracking-tight">
-        {site.name.split(" ")[0]}
+        {site.firstName}
         <span className="text-signal">.</span>
       </span>
     </Link>

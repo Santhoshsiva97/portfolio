@@ -1,16 +1,6 @@
-import resume from "../../content/resume.json";
+import "server-only";
 
-export type NavItem = { label: string; href: string };
-
-export const navItems: NavItem[] = [
-  { label: "Work", href: "/projects" },
-  { label: "Now", href: "/now" },
-  { label: "Services", href: "/services" },
-  { label: "Resume", href: "/resume" },
-];
-
-export const contactHref = "/contact";
-export const resumePdfHref = "/resume.pdf";
+import { getResume } from "@/lib/content";
 
 export type SocialLink = {
   label: string;
@@ -18,22 +8,26 @@ export type SocialLink = {
   icon: "github" | "linkedin" | "mail";
 };
 
+const resume = getResume();
+
 const iconFor: Record<string, SocialLink["icon"]> = {
   GitHub: "github",
   LinkedIn: "linkedin",
 };
 
-/** Social links from resume.json, skipping profiles still marked TODO. */
+/** Social links from resume.json. Profiles whose URL is still TODO are skipped. */
 export const socialLinks: SocialLink[] = [
-  ...resume.basics.profiles
-    .filter((p) => p.url.startsWith("http") && iconFor[p.network])
-    .map((p) => ({ label: p.network, href: p.url, icon: iconFor[p.network] })),
+  ...resume.basics.profiles.flatMap((p) =>
+    p.url && iconFor[p.network]
+      ? [{ label: p.network, href: p.url, icon: iconFor[p.network] }]
+      : [],
+  ),
   { label: "Email", href: `mailto:${resume.basics.email}`, icon: "mail" },
 ];
 
 export const site = {
   name: resume.basics.name,
-  shortName: "SS",
+  firstName: resume.basics.name.split(" ")[0],
   role: resume.basics.label,
   email: resume.basics.email,
   location: `${resume.basics.location.city}, ${resume.basics.location.country}`,

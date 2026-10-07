@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
-import { navItems } from "@/lib/site";
+import { navItems } from "@/lib/nav";
 
 export function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);

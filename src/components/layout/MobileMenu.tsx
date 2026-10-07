@@ -4,12 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
-import { contactHref, navItems, resumePdfHref, socialLinks } from "@/lib/site";
+import { contactHref, navItems, resumePdfHref } from "@/lib/nav";
+import type { SocialLink } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { isActive } from "./NavLinks";
 
-export function MobileMenu() {
+export function MobileMenu({ socialLinks }: { socialLinks: SocialLink[] }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const close = () => setOpen(false);

@@ -7,7 +7,7 @@
 | 0 | Content gathering | 🟡 Started: resume + 2 projects pre-filled, `TODO`s left for the owner |
 | 1 | Project setup | ✅ |
 | 2 | Design system and layout | ✅ |
-| 3 | Content layer | ⬜ |
+| 3 | Content layer | ✅ |
 | 4 | Home page | ⬜ |
 | 5 | Projects | ⬜ |
 | 6 | "Now building" | ⬜ |
@@ -56,3 +56,32 @@
 - Nav links (`/projects`, `/now`, `/services`, `/resume`, `/contact`, `/resume.pdf`) return 404 until their steps are built.
 
 **Next:** Step 3 (content layer: Zod-validated loaders for `resume.json` and the MDX projects).
+
+**Committed:** Steps 0–2 as `3d6be90` on `step-0-1-setup` (not pushed).
+
+### 2026-10-07 — Step 3 (content layer)
+
+**Branch:** `step-3-content-layer` (from `step-0-1-setup` @ `3d6be90`)
+
+- Added `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `@types/mdx`, `remark-frontmatter`, `remark-gfm`, `zod` 4 and `yaml`. `next.config.ts` wraps the config with `createMDX`; plugins are given as strings so Turbopack can use them. New tsconfig alias `@content/*`.
+- `src/lib/content/`:
+  - `schemas.ts`: Zod schemas for `resume.json` and project frontmatter. Dates must be `YYYY-MM` / `YYYY-MM-DD`; `TODO` strings become null.
+  - `resume.ts`: validated at module load.
+  - `projects.ts` (`server-only`): sync frontmatter reads, YAML and Zod with readable errors, missing images dropped, filters and sort, `getProjectBody()` via dynamic MDX import.
+  - `index.ts`: the public API.
+- Split `src/lib/nav.ts` (client-safe) from `src/lib/site.ts` (server-only, built from `getResume()`), so Zod and the resume data stay out of the client bundle. `MobileMenu` now gets `socialLinks` as a prop.
+- MDX rendering: `src/mdx-components.tsx` (typography) and `src/components/mdx/` (`Callout`, `Screenshot`, `Stack`).
+- Content edits:
+  - Body TODOs in both case studies became MDX comments, and each got a "Live demo" / "Launching soon" callout under Results.
+  - `_template.mdx` now lists the available components.
+  - Prettier reformatted `resume.json` (whitespace only).
+- `/styleguide` has a "Content check" section: resume stats, a project table and the interview-prep body rendered through MDX.
+- **Verified:**
+  - Lint, typecheck and build pass. `/styleguide` (with the MDX body) is still statically prerendered.
+  - A deliberately broken `zz-broken.mdx` failed the build with a clear message listing all 3 field errors. The file was removed.
+  - In the preview, the loaders return 2 projects (covers missing, so they fall back), positioning is hidden as TODO, socials are GitHub and email only, and the rendered body has no TODO text.
+  - A headless screenshot of the MDX typography looks right.
+  - The 404 flood in the console happened during the dev-server restart after the `next.config` change. A fresh load has 0 failed requests.
+
+**Next:** Step 4 (home page wired to `content/`: hero positioning, featured projects, skills strip, How I work, testimonials, contact CTA).
+

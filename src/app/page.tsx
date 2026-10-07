@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Accent, Section } from "@/components/ui/Section";
 import { FlowCanvas } from "@/components/visual/FlowCanvas";
-import { contactHref, resumePdfHref } from "@/lib/site";
+import { contactHref, resumePdfHref } from "@/lib/nav";
 
 // Step 2 preview of the design system. Step 4 rebuilds this page from content/ (featured projects, testimonials…).
 const stats = [

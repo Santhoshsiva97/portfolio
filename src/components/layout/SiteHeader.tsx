@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import { contactHref } from "@/lib/site";
+import { contactHref } from "@/lib/nav";
+import { socialLinks } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
@@ -40,7 +41,7 @@ export function SiteHeader() {
           </div>
           <div className="md:hidden">
             <Suspense fallback={null}>
-              <MobileMenu />
+              <MobileMenu socialLinks={socialLinks} />
             </Suspense>
           </div>
         </div>

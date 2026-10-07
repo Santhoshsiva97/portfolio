@@ -8,7 +8,11 @@
     "email": "santhoshsiva2409@gmail.com",
     "phone": "+91 7010736585",
     "showPhone": false,
-    "location": { "city": "Bangalore", "region": "Karnataka", "country": "India" },
+    "location": {
+      "city": "Bangalore",
+      "region": "Karnataka",
+      "country": "India"
+    },
     "photo": "/images/profile.jpg",
     "availability": {
       "freelance": true,
@@ -16,19 +20,84 @@
       "note": "TODO: e.g. 'Open to freelance projects and full-time roles (remote / Bangalore).'"
     },
     "profiles": [
-      { "network": "GitHub", "username": "Santhoshsiva97", "url": "https://github.com/Santhoshsiva97" },
+      {
+        "network": "GitHub",
+        "username": "Santhoshsiva97",
+        "url": "https://github.com/Santhoshsiva97"
+      },
       { "network": "LinkedIn", "username": "TODO", "url": "TODO" }
     ]
   },
   "skills": [
-    { "name": "Languages", "keywords": ["TypeScript", "JavaScript (ES6+)", "Python", "SQL", "HTML5", "CSS3"] },
-    { "name": "Frontend", "keywords": ["React.js", "Next.js", "Responsive Web Design", "Reusable Component Libraries", "Higher-Order Components"] },
-    { "name": "Backend", "keywords": ["Node.js", "Express.js", "NestJS", "RESTful APIs", "GraphQL", "Microservices", "MVC Architecture", "Webhooks"] },
-    { "name": "Databases", "keywords": ["PostgreSQL", "MongoDB", "RDBMS", "Prisma ORM", "Database Design"] },
-    { "name": "Cloud & DevOps", "keywords": ["AWS", "Heroku", "Jenkins", "GitHub Actions", "CI/CD Pipelines"] },
+    {
+      "name": "Languages",
+      "keywords": [
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "Python",
+        "SQL",
+        "HTML5",
+        "CSS3"
+      ]
+    },
+    {
+      "name": "Frontend",
+      "keywords": [
+        "React.js",
+        "Next.js",
+        "Responsive Web Design",
+        "Reusable Component Libraries",
+        "Higher-Order Components"
+      ]
+    },
+    {
+      "name": "Backend",
+      "keywords": [
+        "Node.js",
+        "Express.js",
+        "NestJS",
+        "RESTful APIs",
+        "GraphQL",
+        "Microservices",
+        "MVC Architecture",
+        "Webhooks"
+      ]
+    },
+    {
+      "name": "Databases",
+      "keywords": [
+        "PostgreSQL",
+        "MongoDB",
+        "RDBMS",
+        "Prisma ORM",
+        "Database Design"
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "keywords": [
+        "AWS",
+        "Heroku",
+        "Jenkins",
+        "GitHub Actions",
+        "CI/CD Pipelines"
+      ]
+    },
     { "name": "E-commerce", "keywords": ["Shopify", "Liquid", "Shopify CLI"] },
-    { "name": "Tools & Version Control", "keywords": ["Git", "GitHub", "Bitbucket", "Perforce", "Jira", "npm"] },
-    { "name": "Practices", "keywords": ["Agile/Scrum", "SDLC", "Unit & Regression Testing", "Release Management", "Workflow Automation"] }
+    {
+      "name": "Tools & Version Control",
+      "keywords": ["Git", "GitHub", "Bitbucket", "Perforce", "Jira", "npm"]
+    },
+    {
+      "name": "Practices",
+      "keywords": [
+        "Agile/Scrum",
+        "SDLC",
+        "Unit & Regression Testing",
+        "Release Management",
+        "Workflow Automation"
+      ]
+    }
   ],
   "work": [
     {

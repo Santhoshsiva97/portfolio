@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Accent, Eyebrow, Section } from "@/components/ui/Section";
+import { getProjectBody, getProjects, getResume } from "@/lib/content";
 
 // Internal reference page for the "Flowline" design system. Not linked from the nav.
 export const metadata: Metadata = {
@@ -23,7 +24,12 @@ const colors = [
   { name: "flow-soft", note: "Flow tint" },
 ];
 
-export default function Styleguide() {
+export default async function Styleguide() {
+  const resume = getResume();
+  const projects = getProjects();
+  const sample = projects[0];
+  const SampleBody = sample ? await getProjectBody(sample.slug) : null;
+
   return (
     <>
       <Section
@@ -120,6 +126,81 @@ export default function Styleguide() {
             </p>
           </Card>
         </div>
+      </Section>
+
+      <Section
+        className="border-t border-line"
+        index="99"
+        eyebrow="Content check"
+        title="What the loaders see"
+        intro="Validated at build time. Fields still marked TODO show as empty here and stay hidden on the site."
+      >
+        <dl className="grid gap-4 font-mono text-sm sm:grid-cols-3">
+          <div>
+            <dt className="text-muted">positioning</dt>
+            <dd>{resume.basics.positioning ?? "— (TODO)"}</dd>
+          </div>
+          <div>
+            <dt className="text-muted">skills / work / education</dt>
+            <dd>
+              {resume.skills.length} / {resume.work.length} /{" "}
+              {resume.education.length}
+            </dd>
+          </div>
+          <div>
+            <dt className="text-muted">profiles with URL</dt>
+            <dd>
+              {resume.basics.profiles
+                .filter((p) => p.url)
+                .map((p) => p.network)
+                .join(", ") || "—"}
+            </dd>
+          </div>
+        </dl>
+
+        <div className="mt-10 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full text-left font-mono text-sm">
+            <thead className="bg-surface-2 text-muted">
+              <tr>
+                {[
+                  "slug",
+                  "status",
+                  "type",
+                  "featured",
+                  "order",
+                  "cover",
+                  "stack",
+                ].map((h) => (
+                  <th key={h} className="px-4 py-3 font-medium">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {projects.map((p) => (
+                <tr key={p.slug} className="border-t border-line">
+                  <td className="px-4 py-3">{p.slug}</td>
+                  <td className="px-4 py-3">{p.status}</td>
+                  <td className="px-4 py-3">{p.type}</td>
+                  <td className="px-4 py-3">{String(p.featured)}</td>
+                  <td className="px-4 py-3">{p.order}</td>
+                  <td className="px-4 py-3">{p.cover ?? "— (missing)"}</td>
+                  <td className="px-4 py-3">{p.stack.length} items</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {sample && SampleBody && (
+          <article className="mt-16 max-w-3xl">
+            <Eyebrow>MDX body: {sample.slug}</Eyebrow>
+            <div className="mt-8">
+              <SampleBody />
+            </div>
+          </article>
+        )}
       </Section>
     </>
   );
