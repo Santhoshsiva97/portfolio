@@ -1,0 +1,98 @@
+{
+  "basics": {
+    "name": "Santhosh Sivakumar",
+    "label": "Full Stack Software Engineer",
+    "headline": "Node.js · TypeScript · React.js",
+    "positioning": "TODO: one line for clients, e.g. 'I build fast, reliable web apps, Shopify stores and workflow automation for small businesses.'",
+    "summary": "Full Stack Software Engineer with 7+ years of experience designing, building, and shipping web applications, workflow automation, and REST/GraphQL APIs using Node.js, TypeScript, JavaScript, React.js, and PostgreSQL. Currently at Esko R&D, building and maintaining 50+ Enfocus Switch automation apps that cut manual intervention by 60%. Experienced across the full software development lifecycle (SDLC), including requirements, architecture, development, testing, CI/CD, cloud deployment (AWS, Heroku), and release management in Agile teams.",
+    "email": "santhoshsiva2409@gmail.com",
+    "phone": "+91 7010736585",
+    "showPhone": false,
+    "location": { "city": "Bangalore", "region": "Karnataka", "country": "India" },
+    "photo": "/images/profile.jpg",
+    "availability": {
+      "freelance": true,
+      "fullTime": true,
+      "note": "TODO: e.g. 'Open to freelance projects and full-time roles (remote / Bangalore).'"
+    },
+    "profiles": [
+      { "network": "GitHub", "username": "Santhoshsiva97", "url": "https://github.com/Santhoshsiva97" },
+      { "network": "LinkedIn", "username": "TODO", "url": "TODO" }
+    ]
+  },
+  "skills": [
+    { "name": "Languages", "keywords": ["TypeScript", "JavaScript (ES6+)", "Python", "SQL", "HTML5", "CSS3"] },
+    { "name": "Frontend", "keywords": ["React.js", "Next.js", "Responsive Web Design", "Reusable Component Libraries", "Higher-Order Components"] },
+    { "name": "Backend", "keywords": ["Node.js", "Express.js", "NestJS", "RESTful APIs", "GraphQL", "Microservices", "MVC Architecture", "Webhooks"] },
+    { "name": "Databases", "keywords": ["PostgreSQL", "MongoDB", "RDBMS", "Prisma ORM", "Database Design"] },
+    { "name": "Cloud & DevOps", "keywords": ["AWS", "Heroku", "Jenkins", "GitHub Actions", "CI/CD Pipelines"] },
+    { "name": "E-commerce", "keywords": ["Shopify", "Liquid", "Shopify CLI"] },
+    { "name": "Tools & Version Control", "keywords": ["Git", "GitHub", "Bitbucket", "Perforce", "Jira", "npm"] },
+    { "name": "Practices", "keywords": ["Agile/Scrum", "SDLC", "Unit & Regression Testing", "Release Management", "Workflow Automation"] }
+  ],
+  "work": [
+    {
+      "company": "Esko R&D",
+      "position": "Software Engineer II",
+      "location": "Bangalore, India",
+      "startDate": "2023-05",
+      "endDate": null,
+      "projects": [
+        {
+          "name": "Enfocus Switch Apps – Workflow Automation Platform (Desktop)",
+          "highlights": [
+            "Built and migrated 50+ workflow automation apps for the Enfocus Switch App Store using Node.js, TypeScript, and the Enfocus SDK, owning the full app lifecycle and delivering releases on schedule.",
+            "Designed and maintained automated prepress workflows that reduced manual intervention by 60% and improved production efficiency.",
+            "Reduced customer job onboarding time from 45 minutes to under 10 minutes (~78%) through tailored Switch App automation.",
+            "Integrated Switch with third-party services using RESTful APIs, webhooks, FTP servers, MIS systems, and hot folders.",
+            "Engineered prepress automation features including file validation, preflight, renaming, compression/decompression, split/merge, approval workflows, file sharing, and email notifications.",
+            "Evaluated, installed, and configured community and commercial Enfocus App Store apps to extend core Switch platform functionality.",
+            "Managed source control and CI builds with Perforce, GitHub, and Jenkins, working with AWS cloud services."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Softsquare",
+      "position": "Software Engineer",
+      "location": "Chennai, India",
+      "startDate": "2019-06",
+      "endDate": "2023-04",
+      "projects": [
+        {
+          "name": "Johnson Controls – Contract Management Platform (Web Application)",
+          "highlights": [
+            "Developed full-stack features for a large-scale enterprise contract management application covering contract creation, pricing, booking, approvals, reporting, and service maintenance.",
+            "Built the pricing module, implementing pricing, margin, and profit calculation business logic.",
+            "Developed contract maintenance and auto-renewal workflows across multiple microservices.",
+            "Built optimized, responsive React.js UI components and authored GraphQL schemas and queries for new features.",
+            "Designed REST API endpoints and server-side logic in Node.js and Express.js following MVC architecture; maintained PostgreSQL databases.",
+            "Enhanced reporting features for the client documentation process.",
+            "Deployed and hosted the application on Heroku; handled regression testing, bug fixes, and Git (Bitbucket) version control."
+          ]
+        },
+        {
+          "name": "Online Examination Portal – Recruitment Assessment Platform (Web Application)",
+          "highlights": [
+            "Built a full-stack recruitment assessment platform with separate Candidate and Admin portals to replace traditional hiring tests.",
+            "Developed the candidate exam interface and admin features for exam management, permissions, bulk and manual user management, question set upload, and assessment control.",
+            "Created reusable higher-order and generic React.js components (tables, cards, forms) for a responsive, scalable UI.",
+            "Built REST APIs and server logic with Node.js, Express.js, and PostgreSQL using MVC architecture.",
+            "Worked in Agile sprints with Jira, maintained the CI/CD workflow, and managed Heroku deployments."
+          ]
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Knowledge Institute of Technology (KIOT)",
+      "location": "Tamil Nadu, India",
+      "studyType": "Bachelor of Engineering (B.E.)",
+      "area": "Electronics and Communication Engineering",
+      "endDate": "2019-06"
+    }
+  ],
+  "certificates": [],
+  "testimonials": []
+}

@@ -1,0 +1,48 @@
+---
+title: "Interview Prep Portal"
+summary: "A LeetCode/HackerRank-style platform for MCQ and coding practice, timed mock exams, auto-scoring and analytics, with a full admin console."
+status: "in-progress"
+type: "personal"
+client: "Personal project"
+role: "Solo full-stack developer: architecture, backend, frontend, testing"
+startDate: "2026-09"
+endDate: null
+targetDate: null             # TODO: set a target launch month
+progressNote: "Core platform built: auth, candidate and admin portals, mail, question bank, exam engine, code judge, scorecards and analytics. Payments and subscriptions are next."
+updated: "2026-10-07"
+featured: true
+order: 1
+stack: ["React 19", "TypeScript", "Vite", "NestJS", "Prisma", "PostgreSQL", "Redis", "BullMQ", "Vitest"]
+cover: "/images/projects/interview-prep-portal/cover.jpg"
+gallery: []
+links:
+  live: null
+  github: null
+  caseStudy: null
+results: []
+---
+
+## Problem
+Candidates preparing for technical interviews jump between separate tools for MCQs, coding practice and mock exams, and get little feedback on where they are weak. Hiring teams want the same platform to run screening tests.
+
+## My role
+I'm designing and building the whole product on my own: architecture, database design, a versioned REST API, both web portals and the test suites.
+
+## Approach
+- **NestJS + Prisma over PostgreSQL**, with every route versioned under `/api/v1`. Modules map one-to-one to product features.
+- **Redis + BullMQ** for background work: mail delivery, code evaluation and scoring.
+- **React 19 + Vite** for the candidate and admin portals, with a Monaco code editor in the browser.
+- Built in small, reviewed steps. Each step is covered by Vitest unit and end-to-end tests.
+
+## Key features
+- JWT authentication with rotating refresh tokens, token-reuse detection and role-based access control across five roles
+- Candidate portal: MCQ and coding practice, timed mock exams and virtual interviews
+- Code judge with automatic evaluation and scorecards
+- Insights and analytics dashboards for candidates
+- Admin console: users, question bank with bulk question-set upload, exams and mail templates
+
+## Results
+TODO: add numbers once it's live (question count, test coverage, page speed, first users).
+
+## What's next
+Payments and subscriptions, ads, then a public launch.
