@@ -1,0 +1,64 @@
+{
+  "hero": {
+    "title": "I build web apps, stores & automations that",
+    "accent": "flow.",
+    "intro": "Hi, I'm Santhosh, a full stack engineer with 7+ years shipping React, Node.js and TypeScript products. I help businesses turn messy processes into fast, reliable software."
+  },
+  "stats": [
+    { "value": "7+", "label": "Years shipping software" },
+    { "value": "50+", "label": "Automation apps built" },
+    { "value": "60%", "label": "Less manual work for clients" }
+  ],
+  "techStrip": [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "NestJS",
+    "Express",
+    "PostgreSQL",
+    "GraphQL",
+    "Prisma",
+    "MongoDB",
+    "Shopify",
+    "AWS",
+    "Redis",
+    "REST APIs",
+    "CI/CD"
+  ],
+  "services": [
+    {
+      "tag": "Web apps",
+      "title": "Custom web applications",
+      "body": "Dashboards, portals and SaaS products built with React, Next.js, Node.js and PostgreSQL. Fast, secure, and easy to grow."
+    },
+    {
+      "tag": "E-commerce",
+      "title": "Shopify stores that sell",
+      "body": "Custom themes with a distinctive look, mobile-first product pages and smooth checkout, ready for WhatsApp and Instagram traffic."
+    },
+    {
+      "tag": "Automation",
+      "title": "Workflows & integrations",
+      "body": "Connect your tools with APIs, webhooks and background jobs so repetitive work runs itself. I've built 50+ of these."
+    }
+  ],
+  "process": [
+    {
+      "title": "Discover",
+      "body": "A short call to understand your goals, users and budget. You get a clear scope, timeline and estimate before any work starts."
+    },
+    {
+      "title": "Design & build",
+      "body": "I share regular progress on a live preview link, so you see the product take shape and can steer early."
+    },
+    {
+      "title": "Launch",
+      "body": "Testing on real devices, speed and SEO checks, then a smooth go-live on your domain."
+    },
+    {
+      "title": "Support",
+      "body": "A handover walkthrough, and I stay available for fixes, new features and growth."
+    }
+  ]
+}

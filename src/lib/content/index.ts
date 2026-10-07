@@ -1,4 +1,5 @@
 // Typed, validated access to everything in content/. Components import from here, never from content/ directly.
+export { getHome } from "./home";
 export { getResume } from "./resume";
 export {
   getProject,
@@ -7,4 +8,5 @@ export {
   getProjectSlugs,
   type Project,
 } from "./projects";
-export type { ProjectStatus, ProjectType, Resume } from "./schemas";
+export type { Home, ProjectStatus, ProjectType, Resume } from "./schemas";
+export { formatYearMonth, formatRange, statusLabel, typeLabel } from "./format";

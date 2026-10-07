@@ -67,6 +67,12 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - `src/lib/site.ts` (`server-only`): site info and social links built from `resume.json`. Client components receive these as props.
 - `src/mdx-components.tsx`: case-study typography plus `<Callout tone="note|win|lesson">`, `<Screenshot>` and `<Stack>`, which work in MDX without an import (`src/components/mdx/`).
 
+## Home page
+
+- Copy lives in `content/home.json` (`getHome()`): hero, stats, techStrip, services, process. Experience and testimonials come from `resume.json`, and featured projects come from MDX (`featured: true`, max 3).
+- Sections: `src/components/home/`. Project cards and covers: `src/components/projects/` (shared with Step 5).
+- Animate blocks into view with the `.reveal` class (CSS scroll timeline). Don't put it on elements that already use `transform` on hover.
+
 ## Content layer (`src/lib/content/`)
 
 - Import from `@/lib/content` only: `getResume()`, `getProjects({ status, type, featured })`, `getProject(slug)`, `getProjectSlugs()`, `getProjectBody(slug)`.

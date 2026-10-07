@@ -104,6 +104,33 @@ export const resumeSchema = z.object({
 
 export type Resume = z.output<typeof resumeSchema>;
 
+// ------------------------------------------------------------------ home.json
+
+const copyBlock = z.object({
+  title: z.string().min(1),
+  body: z.string().min(1),
+});
+
+export const homeSchema = z.object({
+  hero: z.object({
+    title: z.string().min(1),
+    /** Last word(s) of the headline, shown in the italic serif accent. */
+    accent: z.string().min(1),
+    /** Fallback intro; resume.json basics.positioning is used instead once it's filled in. */
+    intro: z.string().min(1),
+  }),
+  stats: z
+    .array(z.object({ value: z.string().min(1), label: z.string().min(1) }))
+    .min(2)
+    .max(4),
+  /** Technologies in the scrolling strip under the hero (keep them short). */
+  techStrip: z.array(z.string().max(20)).min(4),
+  services: z.array(copyBlock.extend({ tag: z.string().min(1) })).min(1),
+  process: z.array(copyBlock).min(2).max(6),
+});
+
+export type Home = z.output<typeof homeSchema>;
+
 // ------------------------------------------------- content/projects/*.mdx frontmatter
 
 export const projectStatuses = ["completed", "in-progress", "planned"] as const;

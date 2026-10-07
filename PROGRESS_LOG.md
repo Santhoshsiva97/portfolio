@@ -8,7 +8,7 @@
 | 1 | Project setup | ✅ |
 | 2 | Design system and layout | ✅ |
 | 3 | Content layer | ✅ |
-| 4 | Home page | ⬜ |
+| 4 | Home page | ✅ |
 | 5 | Projects | ⬜ |
 | 6 | "Now building" | ⬜ |
 | 7 | Resume page and PDF | ⬜ |
@@ -84,4 +84,38 @@
   - The 404 flood in the console happened during the dev-server restart after the `next.config` change. A fresh load has 0 failed requests.
 
 **Next:** Step 4 (home page wired to `content/`: hero positioning, featured projects, skills strip, How I work, testimonials, contact CTA).
+
+**Committed:** Step 3 as `ac91ea6` on `step-3-content-layer` (not pushed).
+
+### 2026-10-07 — Step 4 (home page)
+
+**Branch:** `step-4-home-page` (from `step-3-content-layer` @ `ac91ea6`)
+
+- New `content/home.json`, validated by `homeSchema` and loaded with `getHome()`. It holds the hero headline and accent word, the fallback intro, stats, the tech strip, services and process steps. The hero intro uses `resume.json` `basics.positioning` once that's filled in.
+- New `src/lib/content/format.ts`: `formatYearMonth`, `formatRange` (pure string formatting, no clock), `statusLabel`, `typeLabel`.
+- Home sections. Numbering is automatic, so it stays correct when testimonials are hidden.
+  - `Hero`: the availability badge comes from `resume.json`; the availability note shows only once it's filled in.
+  - `SkillsMarquee`: endless strip, pauses on hover, wraps statically for reduced-motion users.
+  - 01 Selected work: up to 3 `featured` projects using `ProjectCard`. With an odd count, the first card spans the full width.
+  - 02 What I build: service cards.
+  - 03 How I work: `ProcessFlow`, numbered nodes on a dashed connector.
+  - 04 Experience: `ExperienceSnapshot` timeline from `resume.json` plus "Full resume" and "Download PDF".
+  - Testimonials: shown only when `resume.json` has some.
+  - The footer's call-to-action band closes the page.
+- `ProjectCard` and `ProjectCover` live in `src/components/projects/` so Step 5 can reuse them. The card is fully clickable through a stretched title link. Without a cover image, `ProjectCover` renders a generated cover (ink, signal or flow colour, dot grid, flow line, title, top 3 technologies).
+- CSS: `.animate-marquee` and a CSS-only `.reveal` scroll animation (`animation-timeline: view()`, only when the user hasn't asked for reduced motion and the browser supports it).
+- Copy I deliberately kept free of commitments: "clear scope, timeline and estimate" (not "fixed quote"), "regular progress" (not "weekly"), and "No commitment. Just a conversation." **The owner should confirm the services and process wording in `content/home.json`.**
+- Fixed during verification:
+  - The stats row was misaligned when a label wrapped.
+  - The process connector didn't reach the first and last nodes.
+  - "@" rendered as ⓐ in Bricolage, so it's now "at".
+- **Verified:**
+  - Lint, typecheck and build pass; `/` is still static.
+  - Full-page headless screenshot (1280, light) looks right.
+  - In the preview: connector endpoints match node centres (±1px) at 1280px and vertically at 375px. Stats tops are equal, stagger delays apply, `reveal-up` with `view()` and `marquee` are active, and there's no horizontal overflow at 375px.
+  - A fresh load has 0 failed requests.
+  - The dev server served stale CSS after the `globals.css` edit, and a preview restart fixed it. If CSS changes don't show up, restart `next dev`.
+- Links to `/projects/<slug>`, `/projects`, `/services`, `/resume` and `/contact` return 404 until Steps 5–8.
+
+**Next:** Step 5 (`/projects` list with filters and `/projects/[slug]` case-study pages).
 
