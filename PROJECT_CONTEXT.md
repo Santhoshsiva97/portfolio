@@ -85,6 +85,13 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - Projects are sorted by `order`, then newest `startDate`. Files starting with `_` are ignored.
 - In dev, projects are re-read on every request; in production they're read once. `/styleguide` has a "Content check" section showing what the loaders return.
 
+## Services and contact
+
+- `content/services.json` (`getServices()`) feeds the home "What I build" cards, `/services` and the contact form options. `startingFrom` / `bookingUrl` set to TODO are hidden ("Custom quote").
+- Contact = Server Action `src/lib/contact/actions.ts` → `deliver.ts`. Provider is chosen by env: `RESEND_API_KEY` (+ `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`) > `FORMSPREE_FORM_ID` > dev console log. See `.env.example`. Never commit `.env.local`.
+- Spam: honeypot `company_website` + `started_at` ≥ 3 s. Bots get a fake success.
+- `/contact?service=<slug>` preselects the project type.
+
 ## Resume
 
 - `/resume` (HTML) and `/resume.pdf` (`src/app/resume.pdf/route.ts`, react-pdf) both render `resume.json`. The PDF also lists in-progress and completed projects. Keep the PDF ATS-safe: one column, Helvetica, no images or tables.

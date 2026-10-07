@@ -39,6 +39,11 @@ Tick these off as you gather them. Search the content files for `TODO` to find e
 - [ ] Services and pricing ("starting from" ₹ amounts), needed by Step 8
 - [ ] Cal.com booking link, needed by Step 8
 
+## Contact form (Step 8)
+
+- [ ] Choose a provider: **Resend** (recommended: emails land in your inbox, free tier) or **Formspree**. Create the account yourself, then copy `.env.example` → `.env.local` and paste the key.
+- [ ] `services.json`: set `startingFrom` prices (or leave "Custom quote"), check the budget ranges and FAQ answers, and optionally add a `bookingUrl` (Cal.com / Calendly).
+
 ## Decisions
 
 - [ ] **Domain name**, e.g. `santhoshsivakumar.dev`, `.in` or `.com`. Needed by Step 11.

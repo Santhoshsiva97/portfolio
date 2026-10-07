@@ -127,11 +127,41 @@ export const homeSchema = z.object({
     .max(4),
   /** Technologies in the scrolling strip under the hero (keep them short). */
   techStrip: z.array(z.string().max(20)).min(4),
-  services: z.array(copyBlock.extend({ tag: z.string().min(1) })).min(1),
   process: z.array(copyBlock).min(2).max(6),
 });
 
 export type Home = z.output<typeof homeSchema>;
+
+// -------------------------------------------------------------- services.json
+
+export const servicesSchema = z.object({
+  intro: z.string().min(1),
+  services: z
+    .array(
+      z.object({
+        /** Used in /contact?service=<slug> to preselect the project type. */
+        slug: z.string().regex(/^[a-z0-9-]+$/),
+        tag: z.string().min(1),
+        title: z.string().min(1),
+        summary: z.string().min(1),
+        includes: z.array(z.string()).min(1),
+        idealFor: z.string().min(1),
+        /** "From ₹…" on the services page; while it's TODO the card says "Custom quote". */
+        startingFrom: todoable.nullable().default(null),
+      }),
+    )
+    .min(1),
+  faq: z
+    .array(z.object({ question: z.string().min(1), answer: z.string().min(1) }))
+    .default([]),
+  contact: z.object({
+    budgets: z.array(z.string().min(1)).min(1),
+    /** Optional scheduling link (Cal.com, Calendly…), shown on /contact once set. */
+    bookingUrl: todoable.pipe(z.url().nullable()).default(null),
+  }),
+});
+
+export type Services = z.output<typeof servicesSchema>;
 
 // ------------------------------------------------------------------- now.json
 

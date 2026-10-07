@@ -2,6 +2,7 @@
 export { getHome } from "./home";
 export { getNow } from "./now";
 export { getResume } from "./resume";
+export { getServices } from "./services";
 export {
   getProject,
   getProjectBody,
@@ -10,7 +11,14 @@ export {
   type Project,
   type ProjectHeading,
 } from "./projects";
-export type { Home, Now, ProjectStatus, ProjectType, Resume } from "./schemas";
+export type {
+  Home,
+  Now,
+  ProjectStatus,
+  ProjectType,
+  Resume,
+  Services,
+} from "./schemas";
 export {
   formatDate,
   formatRange,

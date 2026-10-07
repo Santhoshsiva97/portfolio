@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { contactHref, navItems, resumePdfHref } from "@/lib/nav";
 import { site, socialLinks } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { Accent } from "@/components/ui/Section";
+import { HideOnPaths } from "./HideOnPaths";
 import { Logo } from "./Logo";
 
 // Static on purpose: reading the clock in a prerendered Server Component breaks cacheComponents.
@@ -13,40 +15,44 @@ const COPYRIGHT_YEAR = 2026;
 export function SiteFooter() {
   return (
     <footer className="mt-auto print:hidden">
-      {/* CTA band */}
-      <section className="relative overflow-hidden bg-ink text-paper">
-        <div
-          aria-hidden="true"
-          className="bg-canvas mask-fade absolute inset-0 opacity-40 [--dot:color-mix(in_srgb,var(--paper)_16%,transparent)]"
-        />
-        <Container className="relative py-20 sm:py-28">
-          <p className="font-mono text-xs tracking-[0.18em] text-paper/60 uppercase">
-            Got a project in mind?
-          </p>
-          <h2 className="mt-5 max-w-4xl text-5xl leading-[0.95] font-bold sm:text-7xl lg:text-8xl">
-            Let&apos;s build something that <Accent>flows.</Accent>
-          </h2>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Button
-              href={contactHref}
-              size="lg"
-              icon="arrow-right"
-              className="shadow-[3px_3px_0_0_var(--paper)] hover:shadow-[5px_5px_0_0_var(--paper)]"
-            >
-              Start a project
-            </Button>
-            <Button
-              href={`mailto:${site.email}`}
-              size="lg"
-              variant="ghost"
-              iconLeft="mail"
-              className="text-paper hover:bg-paper/10"
-            >
-              {site.email}
-            </Button>
-          </div>
-        </Container>
-      </section>
+      {/* CTA band (not on /contact, where it would link to itself; usePathname needs Suspense) */}
+      <Suspense fallback={null}>
+        <HideOnPaths paths={[contactHref]}>
+          <section className="relative overflow-hidden bg-ink text-paper">
+            <div
+              aria-hidden="true"
+              className="bg-canvas mask-fade absolute inset-0 opacity-40 [--dot:color-mix(in_srgb,var(--paper)_16%,transparent)]"
+            />
+            <Container className="relative py-20 sm:py-28">
+              <p className="font-mono text-xs tracking-[0.18em] text-paper/60 uppercase">
+                Got a project in mind?
+              </p>
+              <h2 className="mt-5 max-w-4xl text-5xl leading-[0.95] font-bold sm:text-7xl lg:text-8xl">
+                Let&apos;s build something that <Accent>flows.</Accent>
+              </h2>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  icon="arrow-right"
+                  className="shadow-[3px_3px_0_0_var(--paper)] hover:shadow-[5px_5px_0_0_var(--paper)]"
+                >
+                  Start a project
+                </Button>
+                <Button
+                  href={`mailto:${site.email}`}
+                  size="lg"
+                  variant="ghost"
+                  iconLeft="mail"
+                  className="text-paper hover:bg-paper/10"
+                >
+                  {site.email}
+                </Button>
+              </div>
+            </Container>
+          </section>
+        </HideOnPaths>
+      </Suspense>
 
       {/* Link grid */}
       <div className="border-t border-line">

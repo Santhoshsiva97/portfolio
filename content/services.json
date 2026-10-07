@@ -1,0 +1,82 @@
+{
+  "intro": "I work directly with founders, small businesses and teams. You talk to the engineer who builds your product, from the first call to launch day and beyond.",
+  "services": [
+    {
+      "slug": "web-apps",
+      "tag": "Web apps",
+      "title": "Custom web applications",
+      "summary": "Dashboards, portals and SaaS products built with React, Next.js, Node.js and PostgreSQL. Fast, secure, and easy to grow.",
+      "includes": [
+        "Product scoping and data modelling",
+        "Responsive React / Next.js frontend",
+        "REST or GraphQL APIs on Node.js",
+        "Authentication, roles and admin panels",
+        "Testing, deployment and handover"
+      ],
+      "idealFor": "Startups building an MVP, or businesses replacing spreadsheets with a proper tool.",
+      "startingFrom": "TODO: e.g. ₹60,000"
+    },
+    {
+      "slug": "shopify",
+      "tag": "E-commerce",
+      "title": "Shopify stores that sell",
+      "summary": "Custom themes with a distinctive look, mobile-first product pages and smooth checkout, ready for WhatsApp and Instagram traffic.",
+      "includes": [
+        "Custom Online Store 2.0 theme",
+        "Product catalogue and collections setup",
+        "Payments, shipping and tax configuration guidance",
+        "Speed and SEO basics",
+        "Training so you can run the store yourself"
+      ],
+      "idealFor": "Boutiques and resellers moving from WhatsApp or Instagram orders to their own store.",
+      "startingFrom": "TODO: e.g. ₹35,000"
+    },
+    {
+      "slug": "automation",
+      "tag": "Automation",
+      "title": "Workflows & integrations",
+      "summary": "Connect your tools with APIs, webhooks and background jobs so repetitive work runs itself. I've built 50+ of these.",
+      "includes": [
+        "Process review: what to automate first",
+        "API, webhook and file-based integrations",
+        "Scheduled and queued background jobs",
+        "Alerts, logging and error handling",
+        "Documentation for your team"
+      ],
+      "idealFor": "Teams losing hours every week to copy-paste, exports and manual hand-offs.",
+      "startingFrom": "TODO: e.g. ₹25,000"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How much will my project cost?",
+      "answer": "It depends on scope. After a short call I send a written estimate that lists what's included, so you know the cost before any work starts."
+    },
+    {
+      "question": "How long does a project take?",
+      "answer": "Your estimate includes a timeline with milestones. Smaller projects move faster, and I'll tell you upfront if a deadline isn't realistic."
+    },
+    {
+      "question": "How will we stay in touch during the project?",
+      "answer": "You get regular progress updates and a live preview link, so you can see the work and give feedback early, not just at the end."
+    },
+    {
+      "question": "Can you work on an existing codebase or store?",
+      "answer": "Yes. I can review what you have, fix issues and add features, or plan a gradual rebuild if that makes more sense."
+    },
+    {
+      "question": "What happens after launch?",
+      "answer": "I walk you through everything at handover and stay available for fixes, improvements and new features."
+    }
+  ],
+  "contact": {
+    "budgets": [
+      "Not sure yet",
+      "Under ₹50,000",
+      "₹50,000 – ₹1,50,000",
+      "₹1,50,000 – ₹5,00,000",
+      "Above ₹5,00,000"
+    ],
+    "bookingUrl": "TODO: e.g. https://cal.com/your-name/intro"
+  }
+}

@@ -10,7 +10,13 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Accent, Eyebrow, Section } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
-import { getHome, getNow, getProjects, getResume } from "@/lib/content";
+import {
+  getHome,
+  getNow,
+  getProjects,
+  getResume,
+  getServices,
+} from "@/lib/content";
 import { contactHref } from "@/lib/nav";
 
 export default function Home() {
@@ -79,14 +85,14 @@ export default function Home() {
         className="border-t border-line"
       >
         <div className="grid gap-5 md:grid-cols-3">
-          {home.services.map((s, i) => (
+          {getServices().services.map((s, i) => (
             <Card key={s.tag} interactive className="reveal">
               <div className="flex items-center justify-between">
                 <Badge tone={i === 1 ? "signal" : "outline"}>{s.tag}</Badge>
                 <span className="font-mono text-xs text-muted">0{i + 1}</span>
               </div>
               <h3 className="mt-10 text-2xl font-bold">{s.title}</h3>
-              <p className="mt-3 text-muted">{s.body}</p>
+              <p className="mt-3 text-muted">{s.summary}</p>
             </Card>
           ))}
         </div>

@@ -12,7 +12,7 @@
 | 5 | Projects | ✅ |
 | 6 | "Now building" | ✅ |
 | 7 | Resume page and PDF | ✅ |
-| 8 | Services and contact | ⬜ |
+| 8 | Services and contact | ✅ |
 | 9 | SEO and sharing | ⬜ |
 | 10 | Quality pass | ⬜ |
 | 11 | Deploy | ⬜ |
@@ -213,4 +213,48 @@
   - Headless screenshot of the page in light theme looks right.
 
 **Next:** Step 8 (services and contact form).
+
+**Committed:** Step 7 as `99d2c7d` on `step-7-resume` (not pushed).
+
+### 2026-10-07 — Step 8 (services and contact)
+
+**Branch:** `step-8-services-contact` (from `step-7-resume` @ `99d2c7d`)
+
+- **Content:**
+  - New `content/services.json` (`servicesSchema`, `getServices()`): intro; services (slug, tag, title, summary, includes, idealFor, `startingFrom` = TODO → shows "Custom quote"); FAQ; contact `budgets` (INR ranges, editable) and `bookingUrl` (TODO → hidden).
+  - Services moved out of `home.json`, so the home cards now read `services.json` (`summary`).
+  - **The owner decides prices, the budget ranges and the FAQ wording.** None of the copy commits to fixed prices, turnaround times or code ownership.
+- **`/services`:**
+  - Hero with "Start a project" and "See N case studies".
+  - "01 What I offer": a card per service with ideal-for, pricing (or "Custom quote"), "What's included" checklist, and "Discuss this" → `/contact?service=<slug>`.
+  - "02 Process" reuses `ProcessFlow`.
+  - "03 FAQ" as a `<details>` accordion.
+  - A "Not sure which fits?" call-to-action.
+- **`/contact`:**
+  - Form: name, email, "What do you need?" chips (services + "Full-time role" when available + "Something else"), optional budget chips, and a message with a character counter.
+  - Aside: email, booking link (when set), "What happens next" (3 steps) and socials.
+  - The `ContactFormWithParams` Suspense wrapper preselects `?service=`; the fallback renders the same form without a preselect.
+- **Backend (`src/lib/contact/`):**
+  - `schema.ts`: Zod schema, limits and `ContactState`.
+  - `actions.ts`: Server Action `sendContactMessage` (`useActionState`). Spam is caught by a honeypot (`company_website`) and a 3 s minimum fill time (`started_at`, stamped after mount; skipped without JS). Spam gets a fake success. Field errors echo the submitted values back.
+  - `deliver.ts` (`server-only`): Resend REST API if `RESEND_API_KEY` is set (to `CONTACT_TO_EMAIL` or the resume email, from `CONTACT_FROM_EMAIL` or `onboarding@resend.dev`, reply-to the sender); otherwise Formspree if `FORMSPREE_FORM_ID` is set; otherwise logged to the console in dev and an error in production, which tells the visitor to email directly.
+  - `.env.example` added, and `.gitignore` now un-ignores it.
+- **Footer:** the call-to-action band is wrapped in `HideOnPaths` (client, `usePathname`, inside `<Suspense>`), so it's hidden on `/contact`.
+- **Verified:**
+  - Lint, typecheck and build pass; `/services` and `/contact` are static.
+  - Dev:
+    - `?service=shopify` preselects correctly, `started_at` is stamped, and the honeypot is off-screen.
+    - An invalid submit shows 3 field errors with `aria-invalid`, and values are kept.
+    - A valid submit shows the success screen and the full message appears in the server log.
+    - An instant submit and a honeypot submit both show success with nothing logged.
+    - At 375px neither page overflows, the FAQ opens, and the "Discuss this" links are correct.
+  - Production (`portfolio-prod`): the footer band shows on `/services`, hides on `/contact` (also after in-app navigation), `?service=automation` preselects, and with no provider the friendly error shows with values kept and `[contact] delivery failed` logged.
+  - Dev-only quirk: the footer band's Suspense boundary sometimes stays pending in the slow dev server. Production streams it in the same HTML document.
+
+**Owner to do:**
+- Pick Resend (recommended) or Formspree.
+- Put the key in `.env.local` now and in Vercel env vars in Step 11.
+- Set prices / `bookingUrl` in `services.json` if wanted.
+
+**Next:** Step 9 (SEO and sharing: metadata, OG images, sitemap, robots, JSON-LD).
 
