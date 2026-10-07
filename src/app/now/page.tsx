@@ -46,7 +46,7 @@ export default function NowPage() {
         />
         <Container className="relative pt-16 pb-14 sm:pt-24 sm:pb-20">
           <Eyebrow>Now</Eyebrow>
-          <h1 className="mt-5 max-w-4xl animate-rise text-5xl leading-[0.95] font-extrabold sm:text-7xl">
+          <h1 className="mt-5 max-w-4xl animate-lift text-5xl leading-[0.95] font-extrabold sm:text-7xl">
             What I&apos;m <Accent>up to</Accent> right now
           </h1>
           <p className="stagger-1 mt-6 max-w-2xl animate-rise text-lg text-muted sm:text-xl">
@@ -169,7 +169,7 @@ export default function NowPage() {
             // An open slot in the queue doubles as the call to action.
             <div className="reveal flex flex-col justify-between gap-8 rounded-3xl border-2 border-dashed border-signal/60 bg-signal-soft/30 p-6 sm:p-8">
               <div>
-                <p className="font-mono text-xs tracking-[0.18em] text-signal uppercase">
+                <p className="font-mono text-xs tracking-[0.18em] text-signal-ink uppercase">
                   Slot available
                 </p>
                 <h3 className="mt-4 text-2xl font-bold sm:text-3xl">

@@ -17,9 +17,11 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+// Labels only, so it doesn't compete with the headline fonts for early bandwidth.
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 const bricolage = Bricolage_Grotesque({
@@ -31,7 +33,8 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
+  // Only the italic accent is used (<Accent>, testimonials).
+  style: "italic",
 });
 
 const { basics, skills } = getResume();

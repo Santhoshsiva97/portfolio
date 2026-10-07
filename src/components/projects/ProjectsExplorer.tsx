@@ -164,6 +164,8 @@ export function ProjectsFilterView({
         )}
       </div>
 
+      {/* Cards use h3; this keeps the heading order h1 → h2 → h3 for screen readers. */}
+      <h2 className="sr-only">Projects</h2>
       {visible.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2">
           {visible.map((p) => (

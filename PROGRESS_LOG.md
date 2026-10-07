@@ -14,7 +14,7 @@
 | 7 | Resume page and PDF | ✅ |
 | 8 | Services and contact | ✅ |
 | 9 | SEO and sharing | ✅ |
-| 10 | Quality pass | ⬜ |
+| 10 | Quality pass | ✅ |
 | 11 | Deploy | ⬜ |
 | 12 | Launch and upkeep | ⬜ |
 
@@ -290,4 +290,35 @@
 - **After the domain is live:** set `basics.website` (or `NEXT_PUBLIC_SITE_URL` in Vercel), redeploy, then check the Rich Results Test and validator.schema.org, and preview links with LinkedIn Post Inspector and the opengraph.xyz debugger.
 
 **Next:** Step 10 (quality pass: responsive, Lighthouse, accessibility, 404 page).
+
+**Committed:** Step 9 as `5a1cd78` on `step-9-seo` (not pushed).
+
+### 2026-10-08 — Step 10 (quality pass)
+
+**Branch:** `step-10-quality` (from `step-9-seo` @ `5a1cd78`)
+
+- **404:** `src/app/not-found.tsx` shows "This flow hit a *dead end.*" with a broken-workflow SVG, Home/Contact buttons and nav links. It's noindex and returns a real 404 status for unknown URLs.
+- **Accessibility fixes** (found by Lighthouse/axe):
+  - **Light-mode contrast:** `#ff4f1a` as text on paper is only 2.9:1. New tokens:
+    - `--signal-ink` (light `#c2380c`, ≥4.7:1 on paper/white; dark `#ff6a3d`) for every text and icon use (`text-signal` → `text-signal-ink` across 14 files).
+    - `--signal-on-ink` for the inverted ink surfaces (footer call-to-action band, case-study Results panel), applied with `[--signal-ink:var(--signal-on-ink)]`.
+    - Fills and buttons keep `--signal`.
+  - **Scroll reveal:** half-faded content failed contrast while it animated, so `.reveal` is now slide + clip-path unroll with no opacity change. Negative insets keep outside-the-box decorations such as the timeline dots.
+  - FlowCanvas step numbers: `opacity-60` → `font-bold`.
+  - `/projects` heading order: an sr-only h2 sits before the h3 cards.
+  - Mobile menu: `inert` on `#main` and the footer while open, focus moves to the first link, and focus returns to the toggle on Escape or close.
+- **Performance:**
+  - Hero and page h1s use the new `animate-lift` (transform only). With `animate-rise` (opacity 0 → 1), Chrome skipped the headline as an LCP candidate and the LCP became the late-swapped logo text.
+  - Instrument Serif loads italic only; Geist Mono is `preload: false`.
+  - The remaining mobile LCP (~3.0 s under simulated slow 4G, FCP 1.1 s) is the Bricolage webfont swap. `display: optional` would remove it but show fallback headlines on slow first visits, so it was deliberately kept.
+- `/styleguide` display sample no longer overflows at 360px.
+- **Final Lighthouse** (production build, mobile, 7 pages × light and dark):
+  - Accessibility 100, Best Practices 100, SEO 100 everywhere.
+  - Performance 92–95 (one cold-start 85 re-ran at 94/95), CLS 0, TBT 40–150 ms.
+  - Desktop preset (home, case study, contact): **100 in every category**, LCP 0.7 s.
+- **Responsive:** iframes at 360, 768 and 1280px across all 10 pages (including the 404 and styleguide) show no horizontal overflow.
+- **Keyboard:** skip link → `#main`. Mobile menu: opening moves focus to "Home" with main and footer inert; Escape closes it and returns focus to the toggle.
+- Lighthouse 13.5 runs via `npx lighthouse` with `CHROME_PATH` set to the installed Chrome. Reports were kept in the scratchpad only.
+
+**Next:** Step 11 (deploy to Vercel + domain).
 

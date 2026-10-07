@@ -107,7 +107,7 @@ export default async function CaseStudyPage({
             </Badge>
             <Badge tone="outline">{typeLabel[project.type]}</Badge>
           </div>
-          <h1 className="stagger-1 mt-5 max-w-5xl animate-rise text-5xl leading-[0.95] font-extrabold sm:text-7xl">
+          <h1 className="stagger-1 mt-5 max-w-5xl animate-lift text-5xl leading-[0.95] font-extrabold sm:text-7xl">
             {project.title}
           </h1>
           <p className="stagger-2 mt-6 max-w-3xl animate-rise text-lg text-muted sm:text-xl">
@@ -180,7 +180,7 @@ export default async function CaseStudyPage({
         >
           {project.status !== "completed" && (
             <div className="rounded-3xl border border-line bg-surface p-6 sm:p-8">
-              <p className="flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-signal uppercase">
+              <p className="flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-signal-ink uppercase">
                 <span className="size-2 animate-pulse rounded-full bg-signal" />
                 {project.status === "planned" ? "Coming up" : "Now building"}
               </p>
@@ -205,7 +205,7 @@ export default async function CaseStudyPage({
                   <Icon
                     name="spark"
                     size={18}
-                    className="mt-1.5 shrink-0 text-signal"
+                    className="mt-1.5 shrink-0 text-signal-ink"
                   />
                   {r}
                 </li>

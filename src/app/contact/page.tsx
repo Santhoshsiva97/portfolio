@@ -59,7 +59,7 @@ export default function ContactPage() {
         />
         <Container className="relative pt-16 pb-14 sm:pt-24 sm:pb-16">
           <Eyebrow>Contact</Eyebrow>
-          <h1 className="mt-5 max-w-4xl animate-rise text-5xl leading-[0.95] font-extrabold sm:text-7xl">
+          <h1 className="mt-5 max-w-4xl animate-lift text-5xl leading-[0.95] font-extrabold sm:text-7xl">
             Let&apos;s talk about <Accent>your project</Accent>
           </h1>
           <p className="stagger-1 mt-6 max-w-2xl animate-rise text-lg text-muted sm:text-xl">
@@ -82,7 +82,7 @@ export default function ContactPage() {
             </h2>
             <a
               href={`mailto:${basics.email}`}
-              className="mt-3 inline-flex items-center gap-2 font-display text-xl font-bold break-all hover:text-signal sm:text-2xl"
+              className="mt-3 inline-flex items-center gap-2 font-display text-xl font-bold break-all hover:text-signal-ink sm:text-2xl"
             >
               {basics.email}
               <Icon name="arrow-up-right" size={18} className="shrink-0" />

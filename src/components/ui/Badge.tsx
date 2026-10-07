@@ -5,7 +5,7 @@ type Tone = "neutral" | "signal" | "flow" | "outline";
 
 const tones: Record<Tone, string> = {
   neutral: "bg-surface-2 text-ink",
-  signal: "bg-signal-soft text-ink dark:text-signal",
+  signal: "bg-signal-soft text-ink dark:text-signal-ink",
   flow: "bg-flow-soft text-flow",
   outline: "border border-line text-muted",
 };

@@ -41,7 +41,7 @@ export function NowBoard({
               <span
                 className={cn(
                   "flex items-center gap-1.5",
-                  p.status === "planned" ? "text-flow" : "text-signal",
+                  p.status === "planned" ? "text-flow" : "text-signal-ink",
                 )}
               >
                 <span

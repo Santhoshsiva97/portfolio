@@ -18,7 +18,7 @@ export function SiteFooter() {
       {/* CTA band (not on /contact, where it would link to itself; usePathname needs Suspense) */}
       <Suspense fallback={null}>
         <HideOnPaths paths={[contactHref]}>
-          <section className="relative overflow-hidden bg-ink text-paper">
+          <section className="relative overflow-hidden bg-ink text-paper [--signal-ink:var(--signal-on-ink)]">
             <div
               aria-hidden="true"
               className="bg-canvas mask-fade absolute inset-0 opacity-40 [--dot:color-mix(in_srgb,var(--paper)_16%,transparent)]"
@@ -74,7 +74,7 @@ export function SiteFooter() {
               {[...navItems, { label: "Contact", href: contactHref }].map(
                 (item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="hover:text-signal">
+                    <Link href={item.href} className="hover:text-signal-ink">
                       {item.label}
                     </Link>
                   </li>
@@ -83,7 +83,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={resumePdfHref}
-                  className="inline-flex items-center gap-1.5 hover:text-signal"
+                  className="inline-flex items-center gap-1.5 hover:text-signal-ink"
                 >
                   Resume PDF <Icon name="download" size={15} />
                 </a>
@@ -103,7 +103,7 @@ export function SiteFooter() {
                     {...(s.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="inline-flex items-center gap-2 hover:text-signal"
+                    className="inline-flex items-center gap-2 hover:text-signal-ink"
                   >
                     <Icon name={s.icon} size={16} />
                     {s.label}

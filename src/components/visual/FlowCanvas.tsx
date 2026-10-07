@@ -106,7 +106,7 @@ export function FlowCanvas({ className }: { className?: string }) {
               )}
               style={{ animationDelay: `${300 + i * 120}ms` }}
             >
-              <span className="opacity-60">
+              <span className="font-bold">
                 {String(i + 1).padStart(2, "0")}
               </span>
               {node.label}
@@ -130,7 +130,7 @@ export function FlowCanvas({ className }: { className?: string }) {
           <p className="font-mono text-[0.6rem] tracking-wider text-muted uppercase">
             Apps shipped
           </p>
-          <p className="font-display text-lg leading-tight font-bold text-signal">
+          <p className="font-display text-lg leading-tight font-bold text-signal-ink">
             50+
           </p>
         </div>

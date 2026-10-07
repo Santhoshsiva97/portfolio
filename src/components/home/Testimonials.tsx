@@ -12,7 +12,7 @@ export function Testimonials({ items }: { items: Resume["testimonials"] }) {
         >
           <span
             aria-hidden="true"
-            className="font-serif text-7xl leading-none text-signal"
+            className="font-serif text-7xl leading-none text-signal-ink"
           >
             &ldquo;
           </span>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { contactHref, navItems, resumePdfHref } from "@/lib/nav";
 import type { SocialLink } from "@/lib/site";
@@ -15,20 +15,41 @@ export function MobileMenu({ socialLinks }: { socialLinks: SocialLink[] }) {
   const pathname = usePathname();
   const close = () => setOpen(false);
 
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    // The overlay covers the page, so take the page out of the tab order / screen-reader tree while it's open.
+    const background = [
+      document.getElementById("main"),
+      document.querySelector("footer"),
+    ];
+    background.forEach((el) => el?.setAttribute("inert", ""));
+    menuRef.current?.querySelector<HTMLElement>("a")?.focus();
+    const toggle = toggleRef.current;
+    const menu = menuRef.current;
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      background.forEach((el) => el?.removeAttribute("inert"));
+      // Back to the menu button when closed with Escape or the button (not after navigating via a link).
+      if (
+        document.activeElement === document.body ||
+        menu?.contains(document.activeElement)
+      ) {
+        toggle?.focus();
+      }
     };
   }, [open]);
 
   return (
     <>
       <button
+        ref={toggleRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
@@ -40,6 +61,7 @@ export function MobileMenu({ socialLinks }: { socialLinks: SocialLink[] }) {
       </button>
 
       <div
+        ref={menuRef}
         id="mobile-menu"
         hidden={!open}
         className="bg-canvas fixed inset-0 z-40 flex flex-col bg-paper px-4 pt-24 pb-8 sm:px-6"
@@ -73,7 +95,9 @@ export function MobileMenu({ socialLinks }: { socialLinks: SocialLink[] }) {
                     <span
                       className={cn(
                         "font-display text-4xl font-bold tracking-tight transition-colors",
-                        active ? "text-signal" : "group-hover:text-signal",
+                        active
+                          ? "text-signal-ink"
+                          : "group-hover:text-signal-ink",
                       )}
                     >
                       {item.label}

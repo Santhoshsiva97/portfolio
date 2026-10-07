@@ -148,7 +148,7 @@ function ContactFormInner({
           <Icon
             name="spark"
             size={16}
-            className="mt-0.5 shrink-0 text-signal"
+            className="mt-0.5 shrink-0 text-signal-ink"
           />
           {state.message}
         </p>
@@ -223,7 +223,7 @@ function ContactFormInner({
             className={cn(
               "font-mono text-xs",
               messageLength > CONTACT_LIMITS.message
-                ? "text-signal"
+                ? "text-signal-ink"
                 : "text-muted",
             )}
           >
@@ -300,7 +300,7 @@ function Field({
       </div>
       {children}
       {error && (
-        <p id={errorId} className="mt-2 text-sm text-signal">
+        <p id={errorId} className="mt-2 text-sm text-signal-ink">
           {error}
         </p>
       )}
@@ -350,7 +350,7 @@ function ChipGroup({
         ))}
       </div>
       {error && (
-        <p id={errorId} className="mt-2 text-sm text-signal">
+        <p id={errorId} className="mt-2 text-sm text-signal-ink">
           {error}
         </p>
       )}

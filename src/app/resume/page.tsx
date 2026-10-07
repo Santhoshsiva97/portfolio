@@ -69,7 +69,7 @@ export default function ResumePage() {
           <div className="print:hidden">
             <Eyebrow>Resume</Eyebrow>
           </div>
-          <h1 className="mt-5 animate-rise text-5xl leading-[0.95] font-extrabold sm:text-7xl print:text-4xl">
+          <h1 className="mt-5 animate-lift text-5xl leading-[0.95] font-extrabold sm:text-7xl print:text-4xl">
             {basics.name}
           </h1>
           <p className="stagger-1 mt-4 animate-rise text-xl sm:text-2xl">
@@ -103,7 +103,7 @@ export default function ResumePage() {
                     {...(c.href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="flex items-center gap-2.5 text-sm break-all hover:text-signal"
+                    className="flex items-center gap-2.5 text-sm break-all hover:text-signal-ink"
                   >
                     <Icon
                       name={c.icon}

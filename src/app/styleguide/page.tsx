@@ -63,7 +63,7 @@ export default async function Styleguide() {
           Typography
         </h3>
         <div className="space-y-6">
-          <p className="font-display text-7xl leading-none font-extrabold">
+          <p className="font-display text-5xl leading-none font-extrabold break-words sm:text-7xl">
             Display / Bricolage
           </p>
           <p className="font-display text-5xl font-bold">

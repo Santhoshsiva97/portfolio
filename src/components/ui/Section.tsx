@@ -75,7 +75,7 @@ export function Accent({
   return (
     <em
       className={cn(
-        "font-serif font-normal tracking-normal text-signal italic",
+        "font-serif font-normal tracking-normal text-signal-ink italic",
         className,
       )}
     >

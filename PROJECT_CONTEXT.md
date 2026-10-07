@@ -45,6 +45,8 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 | `line` | `#dcd6ca` | `#2a2c34` | Borders |
 | `signal` | `#ff4f1a` | `#ff6a3d` | Primary accent and CTAs. Text on it is always `on-accent` (ink), never white |
 | `flow` | `#2f45ff` | `#8593ff` | Links, diagram lines, focus ring |
+| `signal-ink` | `#c2380c` | `#ff6a3d` | **Signal-coloured text and icons** (WCAG AA). Never use `text-signal` for text |
+| `signal-on-ink` | `#ff4f1a` | `#c2380c` | Text on `bg-ink` surfaces, via `[--signal-ink:var(--signal-on-ink)]` on the container |
 
 - **Type:** Bricolage Grotesque (`font-display`, headings), Instrument Serif italic (`<Accent>`, one emphasis word per heading), Geist (body), Geist Mono (labels, eyebrows, numbers).
 - **Motifs:**
@@ -54,7 +56,7 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
   - The hero `FlowCanvas`: Brief → Design → Build → Test → Launch
   - Primary buttons with a hard offset shadow
   - Interactive cards that draw a signal→flow line along the top edge on hover
-- **Motion:** `animate-rise` entrances with `stagger-1..4`. Everything is switched off under `prefers-reduced-motion`.
+- **Motion:** `animate-rise` (fade + slide) entrances with `stagger-1..4`. **Page h1s use `animate-lift`** (transform only), because a heading that starts at opacity 0 isn't counted as the LCP. `.reveal` slides and clip-unrolls without opacity, so contrast stays valid. Everything is switched off under `prefers-reduced-motion`.
 - **Theme:** `data-theme` on `<html>` is set before paint by `ThemeScript` (from localStorage, else the OS setting). The toggle is `ThemeToggle`. Use the `dark:` variant only when the tokens can't express a difference.
 - **Reference page:** `/styleguide` (noindex, not in the nav).
 

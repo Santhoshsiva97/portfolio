@@ -18,6 +18,10 @@
   --line: #dcd6ca;
   --signal: #ff4f1a;
   --signal-soft: #ffe2d6;
+  /* Signal as TEXT: deeper vermilion that passes WCAG AA on paper/white (#ff4f1a is only 2.9:1). */
+  --signal-ink: #c2380c;
+  /* Signal text on the inverted ink surfaces (dark band in light mode). */
+  --signal-on-ink: #ff4f1a;
   --flow: #2f45ff;
   --flow-soft: #dfe3ff;
   --on-accent: #15161a;
@@ -34,6 +38,8 @@
   --line: #2a2c34;
   --signal: #ff6a3d;
   --signal-soft: #3a1c12;
+  --signal-ink: #ff6a3d;
+  --signal-on-ink: #c2380c;
   --flow: #8593ff;
   --flow-soft: #1c2048;
   --on-accent: #0e0f12;
@@ -52,6 +58,8 @@
     --line: #2a2c34;
     --signal: #ff6a3d;
     --signal-soft: #3a1c12;
+    --signal-ink: #ff6a3d;
+    --signal-on-ink: #c2380c;
     --flow: #8593ff;
     --flow-soft: #1c2048;
     --on-accent: #0e0f12;
@@ -69,6 +77,7 @@
   --color-line: var(--line);
   --color-signal: var(--signal);
   --color-signal-soft: var(--signal-soft);
+  --color-signal-ink: var(--signal-ink);
   --color-flow: var(--flow);
   --color-flow-soft: var(--flow-soft);
   --color-on-accent: var(--on-accent);
@@ -85,6 +94,8 @@
   --animate-flow-dash: flow-dash 1.6s linear infinite;
   --animate-pulse-ring: pulse-ring 2s var(--ease-out-expo) infinite;
   --animate-rise: rise 0.8s var(--ease-out-expo) both;
+  /* Transform-only entrance for LCP text (headings): never transparent, so it counts as painted at once. */
+  --animate-lift: lift 0.8s var(--ease-out-expo) both;
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes flow-dash {
@@ -100,6 +111,14 @@
     100% {
       transform: scale(2.6);
       opacity: 0;
+    }
+  }
+  @keyframes lift {
+    from {
+      transform: translateY(18px);
+    }
+    to {
+      transform: none;
     }
   }
   @keyframes rise {
@@ -206,17 +225,20 @@
 }
 
 @keyframes reveal-up {
+  /* Negative insets leave room for things drawn outside the box (e.g. timeline dots); only the bottom edge
+     is masked, so the block "unrolls" upward. */
   from {
-    opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(32px);
+    clip-path: inset(-120px -120px 22% -120px);
   }
   to {
-    opacity: 1;
     transform: none;
+    clip-path: inset(-120px -120px -120px -120px);
   }
 }
 
-/* Scroll reveal with no JS: fades blocks in as they enter the viewport.
+/* Scroll reveal with no JS: blocks slide up and unmask as they enter the viewport. No opacity change, so
+   text is never half-transparent (keeps colour contrast valid for readers and accessibility checkers).
    Browsers without scroll timelines, and reduced-motion users, just see the content. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {

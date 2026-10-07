@@ -46,7 +46,7 @@ export default function ProjectsPage() {
         />
         <Container className="relative pt-16 pb-14 sm:pt-24 sm:pb-20">
           <Eyebrow>Work</Eyebrow>
-          <h1 className="mt-5 max-w-4xl animate-rise text-5xl leading-[0.95] font-extrabold sm:text-7xl">
+          <h1 className="mt-5 max-w-4xl animate-lift text-5xl leading-[0.95] font-extrabold sm:text-7xl">
             Projects &amp; <Accent>case studies</Accent>
           </h1>
           <p className="stagger-1 mt-6 max-w-2xl animate-rise text-lg text-muted sm:text-xl">

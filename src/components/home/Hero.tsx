@@ -38,7 +38,7 @@ export function Hero({ home, resume }: { home: Home; resume: Resume }) {
               </Badge>
             </div>
           )}
-          <h1 className="stagger-1 mt-6 animate-rise text-5xl leading-[0.95] font-extrabold sm:text-6xl xl:text-7xl">
+          <h1 className="stagger-1 mt-6 animate-lift text-5xl leading-[0.95] font-extrabold sm:text-6xl xl:text-7xl">
             {home.hero.title} <Accent>{home.hero.accent}</Accent>
           </h1>
           <p className="stagger-2 mt-6 max-w-xl animate-rise text-lg text-muted sm:text-xl">

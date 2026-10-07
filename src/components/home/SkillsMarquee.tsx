@@ -13,7 +13,7 @@ export function SkillsMarquee({ skills }: { skills: string[] }) {
           className="flex items-center gap-8 font-display text-2xl font-bold tracking-tight whitespace-nowrap text-ink/80 sm:gap-12 sm:text-3xl"
         >
           {skill}
-          <Icon name="spark" size={18} className="text-signal" />
+          <Icon name="spark" size={18} className="text-signal-ink" />
         </li>
       ))}
     </ul>
