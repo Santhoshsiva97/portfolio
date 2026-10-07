@@ -15,7 +15,7 @@
 | 8 | Services and contact | ✅ |
 | 9 | SEO and sharing | ✅ |
 | 10 | Quality pass | ✅ |
-| 11 | Deploy | ⬜ |
+| 11 | Deploy | 🟡 Code ready; waiting on owner accounts (Vercel, domain, Resend) |
 | 12 | Launch and upkeep | ⬜ |
 
 ## Log
@@ -321,4 +321,20 @@
 - Lighthouse 13.5 runs via `npx lighthouse` with `CHROME_PATH` set to the installed Chrome. Reports were kept in the scratchpad only.
 
 **Next:** Step 11 (deploy to Vercel + domain).
+
+**Committed:** Step 10 as `b66c060` on `step-10-quality` (not pushed).
+
+### 2026-10-08 — Step 11 (deploy, part 1: preparation)
+
+**Branch:** `step-11-deploy` (from `step-10-quality` @ `b66c060`)
+
+- `next.config.ts` `outputFileTracingIncludes` (`/*` and `/**/*`) → `./content/**/*` and `./src/assets/fonts/**/*`. Verified in `.nft.json`: the `[slug]` page, the `[slug]` OG route and `/contact` now trace all 7 content files and the fonts. These runtime paths read the files via `process.cwd()`.
+- `@vercel/analytics` 2.0.1: `<Analytics />` in the layout, inside `<Suspense>` because it uses `useSearchParams`. Cookieless, and active once Web Analytics is enabled in the Vercel dashboard. `/` is still static.
+- `package.json` `engines.node = "24.x"`, so Vercel matches local Node 24.
+- **Clean-room check:** only git-visible files (`git ls-files -co --exclude-standard`) were copied to the scratchpad, then `npm ci` and `npm run build` ran. It compiled and all 25 routes were generated.
+- `DEPLOY.md`: owner checklist covering GitHub push, Vercel import/deploy/analytics, domain + DNS, Resend (API key, env vars, domain verification), and the post-launch checks (sitemap, LinkedIn Post Inspector, Search Console, Rich Results).
+- `origin/main` = `2d73db5` (old Vite version), so `main` can fast-forward to this branch.
+- **GitHub repo `Santhoshsiva97/portfolio` is PUBLIC.** Pushing publishes `content/` (including the phone number in `resume.json`; it's also in the public PDF) and the content TODO comments.
+
+**Waiting on the owner:** push approval, Vercel sign-up/import, domain purchase + DNS, Resend account/key.
 

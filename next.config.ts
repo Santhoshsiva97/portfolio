@@ -4,6 +4,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  // Code that runs at request time on Vercel (the contact Server Action, unknown /projects/<slug> URLs, their
+  // OG images) reads these files from disk via process.cwd(), which the tracer can't see. Bundle them explicitly.
+  outputFileTracingIncludes: {
+    "/*": ["./content/**/*", "./src/assets/fonts/**/*"],
+    "/**/*": ["./content/**/*", "./src/assets/fonts/**/*"],
+  },
   turbopack: {
     rules: {
       "*.css": {

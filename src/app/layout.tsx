@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import {
   Bricolage_Grotesque,
@@ -8,6 +9,7 @@ import {
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeScript } from "@/components/layout/ThemeScript";
+import { Suspense } from "react";
 import { getResume } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -87,6 +89,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        {/* Cookieless page views (active once Web Analytics is enabled in Vercel). It reads the URL, so it needs Suspense. */}
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );
