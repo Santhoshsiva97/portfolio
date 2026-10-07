@@ -10,7 +10,7 @@
 | 3 | Content layer | ✅ |
 | 4 | Home page | ✅ |
 | 5 | Projects | ✅ |
-| 6 | "Now building" | ⬜ |
+| 6 | "Now building" | ✅ |
 | 7 | Resume page and PDF | ⬜ |
 | 8 | Services and contact | ⬜ |
 | 9 | SEO and sharing | ⬜ |
@@ -154,4 +154,31 @@
   - Screenshots: the case study in light theme, before and after the cover-size fix, and `/projects` in dark theme.
 
 **Next:** Step 6 ("Now building" section on home and `/now`).
+
+**Committed:** Step 5 as `87d1c76` on `step-5-projects` (not pushed).
+
+### 2026-10-07 — Step 6 ("Now building")
+
+**Branch:** `step-6-now` (from `step-5-projects` @ `87d1c76`)
+
+- **Content:**
+  - New `content/now.json` (`nowSchema`, `getNow()`): `updated`, `intro`, a one-sentence `focus`, and `learning[]`.
+  - New optional frontmatter field `progress` (0–100). Interview Prep is set to **45** (10 of 22 build steps done) and PS Textile to **90** (build done, launch pending). **The owner should confirm both.**
+  - The learning items are drawn only from what the projects actually use: Next.js 16 / Cache Components, Shopify theme development, Redis + BullMQ.
+- **`/now`:**
+  - Header with an "Updated …" badge and a link explaining what a now page is.
+  - 01 "On the workbench": in-progress projects with cover, note, `ProgressBar`, started/target/updated dates and a link to the case study.
+  - 02 "Coming up": planned projects, plus a dashed "Slot available — your project could be next" call-to-action while `availability.freelance` is true.
+  - 03 "Getting better at": the learning list.
+  - 04 "Ways to work together": freelance and full-time cards driven by `resume.json` availability. A closed option is dimmed and has no button.
+- **Home:** a new "04 Right now" section between "How I work" and "Experience". It shows the `focus` sentence, a "More on my now page" link, and `NowBoard`, a `now.log` window with one row per in-progress or planned project: status, title, a two-line note and the progress bar. Section numbers shifted automatically (Experience is now 05).
+- `src/components/now/`: `ProgressBar` (`role="progressbar"`, dashed track, signal→flow fill, node at the value) and `NowBoard`.
+- Fixed during verification: the open-to badges stretched across the full width inside the flex-column cards (fixed with `self-start`).
+- **Verified:**
+  - Lint, typecheck and build pass; `/now` is static.
+  - On home: eyebrows run 01–05, progress-bar nodes sit at exactly 45% and 90% with aria values and labels, and "updated 7 Oct 2026" shows.
+  - On `/now`: the "Now" nav item is active, the 4 sections render with the slot call-to-action and both open-to cards, and there are 0 failed requests.
+  - Screenshots: `/now` in light theme and the home now-board in dark theme.
+
+**Next:** Step 7 (resume page + generated ATS PDF at `/resume.pdf`).
 

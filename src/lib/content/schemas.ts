@@ -131,6 +131,21 @@ export const homeSchema = z.object({
 
 export type Home = z.output<typeof homeSchema>;
 
+// ------------------------------------------------------------------- now.json
+
+export const nowSchema = z.object({
+  /** When you last edited this page, "YYYY-MM-DD". Shown as "Updated …". */
+  updated: isoDate,
+  intro: z.string().min(1),
+  /** One sentence on this month's focus, shown on the home page's now-board. */
+  focus: z.string().min(1),
+  learning: z
+    .array(z.object({ topic: z.string().min(1), note: z.string().min(1) }))
+    .default([]),
+});
+
+export type Now = z.output<typeof nowSchema>;
+
 // ------------------------------------------------- content/projects/*.mdx frontmatter
 
 export const projectStatuses = ["completed", "in-progress", "planned"] as const;
@@ -150,6 +165,8 @@ export const projectFrontmatterSchema = z.object({
   endDate: yearMonth.nullable().default(null),
   targetDate: yearMonth.nullable().default(null),
   progressNote: z.string().nullable().default(null),
+  /** Rough completion for in-progress work (0–100), shown as a progress bar on /now. */
+  progress: z.number().int().min(0).max(100).nullable().default(null),
   updated: isoDate,
   featured: z.boolean().default(false),
   order: z.number().int().default(99),

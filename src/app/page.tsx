@@ -3,13 +3,14 @@ import { Hero } from "@/components/home/Hero";
 import { ProcessFlow } from "@/components/home/ProcessFlow";
 import { SkillsMarquee } from "@/components/home/SkillsMarquee";
 import { Testimonials } from "@/components/home/Testimonials";
+import { NowBoard } from "@/components/now/NowBoard";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Accent, Section } from "@/components/ui/Section";
+import { Accent, Eyebrow, Section } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
-import { getHome, getProjects, getResume } from "@/lib/content";
+import { getHome, getNow, getProjects, getResume } from "@/lib/content";
 import { contactHref } from "@/lib/nav";
 
 export default function Home() {
@@ -17,6 +18,8 @@ export default function Home() {
   const resume = getResume();
   const featured = getProjects({ featured: true }).slice(0, 3);
   const testimonials = resume.testimonials;
+  const now = getNow();
+  const active = getProjects({ status: ["in-progress", "planned"] });
 
   // Section numbers follow what's actually shown (testimonials only appear once there are some).
   let n = 0;
@@ -113,6 +116,28 @@ export default function Home() {
           <p className="text-sm text-muted">
             No commitment. Just a conversation about what you need.
           </p>
+        </div>
+      </Section>
+
+      <Section id="now" className="border-t border-line">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <div className="reveal">
+            <Eyebrow index={next()}>Right now</Eyebrow>
+            <h2 className="mt-5 text-4xl leading-[1.05] font-bold sm:text-5xl">
+              What I&apos;m <Accent>working on</Accent>
+            </h2>
+            <p className="mt-5 text-lg text-muted">{now.focus}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/now" variant="outline" icon="arrow-right">
+                More on my now page
+              </Button>
+            </div>
+          </div>
+          <NowBoard
+            projects={active}
+            updated={now.updated}
+            className="reveal"
+          />
         </div>
       </Section>
 

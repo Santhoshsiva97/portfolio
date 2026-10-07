@@ -1,0 +1,19 @@
+{
+  "updated": "2026-10-07",
+  "intro": "A snapshot of what has my attention this month: the products I'm building, what's coming up next, and what I'm getting better at. If you're reading this and have a project in mind, I'd love to hear about it.",
+  "focus": "Finishing the Interview Prep Portal's payments module, launching the PS Textile store, and taking on new freelance work.",
+  "learning": [
+    {
+      "topic": "Next.js 16 & Cache Components",
+      "note": "Partial prerendering and static shells. This site is built on them."
+    },
+    {
+      "topic": "Shopify theme development",
+      "note": "Online Store 2.0 sections and blocks, Liquid, and keeping storefront motion fast on phones."
+    },
+    {
+      "topic": "Queues & background jobs",
+      "note": "Redis and BullMQ for mail delivery and code evaluation in the Interview Prep Portal."
+    }
+  ]
+}

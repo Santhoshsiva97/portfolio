@@ -85,6 +85,11 @@ The idea: I turn messy processes into things that flow (50+ workflow-automation 
 - Projects are sorted by `order`, then newest `startDate`. Files starting with `_` are ignored.
 - In dev, projects are re-read on every request; in production they're read once. `/styleguide` has a "Content check" section showing what the loaders return.
 
+## Now page
+
+- `content/now.json` (`getNow()`): update `updated` whenever you edit it. Project progress comes from frontmatter `progress` + `progressNote` + `targetDate`.
+- `/now` and the home `NowBoard` show `in-progress` + `planned` projects. The "Slot available" call-to-action appears while `resume.json` `availability.freelance` is true.
+
 ## Projects pages
 
 - `/projects` uses `ProjectsExplorer` (client): filters live in the URL and the cards are server-rendered and passed in by slug. Keep `useSearchParams` inside `<Suspense>` whose fallback is `ProjectsFilterView params={null}` (the full list stays in the static HTML).

@@ -25,6 +25,12 @@ Tick these off as you gather them. Search the content files for `TODO` to find e
 - [ ] Planned projects for "Now building" (status `planned`), e.g. your next freelance offer or product idea
 - [ ] This portfolio itself, as a small case study once it's live
 
+## Keep fresh (monthly)
+
+- [ ] `content/now.json`: `updated`, `focus`, `learning`
+- [ ] Each in-progress project: `progress`, `progressNote`, `targetDate`, `updated`
+- [ ] Confirm the progress estimates: Interview Prep 45%, PS Textile 90%
+
 ## Nice to have
 
 - [ ] Testimonials (`resume.json` → `testimonials`: `{ "name", "role", "quote", "projectSlug" }`)
